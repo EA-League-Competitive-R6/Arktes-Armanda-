@@ -1,0 +1,2897 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Arktes Armada - Elite Rainbow Six Siege Competitive Community. Join tournaments, scrims, and connect with top R6 players.">
+    <meta name="keywords" content="Rainbow Six Siege, R6, competitive, esports, tournaments, Arktes Armada">
+    <meta name="author" content="Arktes Armada">
+    <meta property="og:title" content="Arktes Armada | Elite R6 Competitive Community">
+    <meta property="og:description" content="Where tactical excellence meets competitive dominance. Join the most advanced Rainbow Six Siege community.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://arktesarmada.com">
+    <meta name="theme-color" content="#8b5cf6">
+    <title>Arktes Armada | Elite R6 Competitive Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                        gaming: ['Rajdhani', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#050508',
+                            panel: '#0f0f1a',
+                            accent: '#8b5cf6',
+                            glow: '#a78bfa',
+                            dim: '#4c1d95',
+                            danger: '#ef4444',
+                            success: '#22c55e',
+                            warning: '#f59e0b',
+                            discord: '#5865F2'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            'from': { boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)' },
+                            'to': { boxShadow: '0 0 40px rgba(139, 92, 246, 0.6)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { box-sizing: border-box; }
+        body { background-color: #050508; color: #e2e8f0; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f0f1a; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8b5cf6, #4c1d95); border-radius: 4px; }
+        .glass-panel {
+            background: rgba(15, 15, 26, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        .glass-nav {
+            background: rgba(5, 5, 8, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+        }
+        .text-glow { text-shadow: 0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3); }
+        .input-field {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #4c1d95;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+            outline: none;
+        }
+        .bg-grid {
+            background-size: 50px 50px;
+            background-image: linear-gradient(to right, rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn-primary:hover::before { left: 100%; }
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+            transform: translateY(-2px);
+        }
+        .staff-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 3px solid transparent;
+        }
+        .staff-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+        .rank-arktes { border-left-color: #ffd700; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05)); }
+        .rank-iso { border-left-color: #ff6b6b; background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 107, 107, 0.05)); }
+        .rank-overseer { border-left-color: #4ecdc4; background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(78, 205, 196, 0.05)); }
+        .rank-lead-staff { border-left-color: #95e1d3; background: linear-gradient(135deg, rgba(149, 225, 211, 0.1), rgba(149, 225, 211, 0.05)); }
+        .rank-council { border-left-color: #a8e6cf; background: linear-gradient(135deg, rgba(168, 230, 207, 0.1), rgba(168, 230, 207, 0.05)); }
+        .rank-council-deputy { border-left-color: #c7ceea; background: linear-gradient(135deg, rgba(199, 206, 234, 0.1), rgba(199, 206, 234, 0.05)); }
+        .rank-director { border-left-color: #ffd93d; background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), rgba(255, 217, 61, 0.05)); }
+        .rank-executive { border-left-color: #6bcf7f; background: linear-gradient(135deg, rgba(107, 207, 127, 0.1), rgba(107, 207, 127, 0.05)); }
+        .rank-secretary { border-left-color: #ff8b94; background: linear-gradient(135deg, rgba(255, 139, 148, 0.1), rgba(255, 139, 148, 0.05)); }
+        .rank-support { border-left-color: #a78bfa; background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(167, 139, 250, 0.05)); }
+        .modal-enter { animation: modalEnter 0.3s ease-out; }
+        @keyframes modalEnter {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .chat-message { animation: messageSlide 0.3s ease-out; }
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .calendar-day { transition: all 0.2s ease; cursor: pointer; }
+        .calendar-day:hover:not(.empty) {
+            background: rgba(139, 92, 246, 0.2);
+            transform: scale(1.05);
+        }
+        .calendar-day.has-event {
+            border: 1px solid #8b5cf6;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+        }
+        .calendar-day.selected {
+            background: rgba(139, 92, 246, 0.4);
+            border-color: #a78bfa;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        #mobile-menu.open { max-height: 500px; opacity: 1; }
+        .dashboard-panel { display: none; }
+        .dashboard-panel.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #8b5cf6;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .typing-indicator span { animation: typing 1.4s infinite; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        .discord-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .status-online { background-color: #22c55e; box-shadow: 0 0 8px #22c55e; }
+        .status-idle { background-color: #f59e0b; }
+        .status-dnd { background-color: #ef4444; }
+        .status-offline { background-color: #6b7280; }
+        .live-indicator { animation: pulse-live 2s infinite; }
+        @keyframes pulse-live {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .bracket-match {
+            background: rgba(15, 15, 26, 0.9);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .bracket-match:hover {
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+        }
+        .bracket-match.winner {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+        }
+        .bracket-round {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            min-width: 220px;
+            padding: 0 20px;
+        }
+        .bracket-container {
+            display: flex;
+            overflow-x: auto;
+            padding: 20px;
+            gap: 20px;
+        }
+        #stats-modal { animation: statsModalEnter 0.3s ease-out; }
+        @keyframes statsModalEnter {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        #stats-frame { opacity: 0; transition: opacity 0.3s ease; }
+        #stats-frame.loaded { opacity: 1; }
+        #tos-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        #tos-content {
+            max-height: 60vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #8b5cf6 #0f0f1a;
+        }
+        #tos-content::-webkit-scrollbar { width: 8px; }
+        #tos-content::-webkit-scrollbar-track { background: #0f0f1a; }
+        #tos-content::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 4px; }
+        .announcement-banner {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9998;
+            max-width: 90%;
+            width: 600px;
+            animation: slideDown 0.5s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        .announcement-banner.closing {
+            animation: slideUp 0.3s ease-in forwards;
+        }
+        @keyframes slideUp {
+            to { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+        }
+        .event-popup { animation: eventPopupEnter 0.3s ease-out; }
+        @keyframes eventPopupEnter {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .rank-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+        .discord-live-badge {
+            animation: discordPulse 2s infinite;
+        }
+        @keyframes discordPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+            50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+        }
+        .match-card {
+            background: rgba(15, 15, 26, 0.8);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.3s ease;
+        }
+        .match-card:hover {
+            border-color: rgba(139, 92, 246, 0.6);
+            transform: translateY(-2px);
+        }
+        .team-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #4c1d95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .score-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .notification-toast {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 9997;
+            animation: slideInRight 0.3s ease-out;
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .notification-toast.hiding {
+            animation: slideOutRight 0.3s ease-in forwards;
+        }
+        @keyframes slideOutRight {
+            to { opacity: 0; transform: translateX(100%); }
+        }
+    </style>
+    <base target="_blank">
+</head>
+<body class="antialiased min-h-screen flex flex-col relative">
+
+    <!-- Terms of Service Modal -->
+    <div id="tos-modal" style="display: none;">
+        <div class="glass-panel p-8 rounded-2xl max-w-3xl w-full border border-purple-500/50 shadow-[0_0_50px_rgba(139,92,246,0.3)] modal-enter">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 mx-auto rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/50 mb-4">
+                    <i class="fas fa-file-contract text-3xl text-purple-400"></i>
+                </div>
+                <h2 class="text-3xl font-display font-bold text-white">Terms of Service</h2>
+                <p class="text-gray-400 text-sm mt-2">You must agree to these terms before accessing Arktes Armada</p>
+            </div>
+            <div id="tos-content" class="bg-black/40 rounded-lg p-6 mb-6 text-sm text-gray-300 space-y-4">
+                <h3 class="text-lg font-bold text-purple-400">1. Acceptance of Terms</h3>
+                <p>By accessing and using the Arktes Armada website and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, you may not access or use our services.</p>
+                <h3 class="text-lg font-bold text-purple-400">2. Community Guidelines</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>Treat all members with respect and dignity</li>
+                    <li>No harassment, hate speech, or discriminatory behavior</li>
+                    <li>No cheating, hacking, or exploiting in any form</li>
+                    <li>No sharing of personal information (doxing)</li>
+                    <li>Follow all Discord Terms of Service</li>
+                    <li>No NSFW content or inappropriate material</li>
+                </ul>
+                <h3 class="text-lg font-bold text-purple-400">3. Competitive Integrity</h3>
+                <p>All tournament participants must compete fairly. Any form of cheating, match-fixing, or unsportsmanlike conduct will result in immediate disqualification and potential permanent bans from all Arktes Armada services.</p>
+                <h3 class="text-lg font-bold text-purple-400">4. Account Security</h3>
+                <p>You are responsible for maintaining the confidentiality of your account information. Arktes Armada is not liable for any loss or damage arising from your failure to secure your account.</p>
+                <h3 class="text-lg font-bold text-purple-400">5. Data Collection</h3>
+                <p>We collect and store data necessary for website functionality. This data is stored securely and never sold to third parties.</p>
+                <h3 class="text-lg font-bold text-purple-400">6. Ban Policy</h3>
+                <p>Arktes Armada reserves the right to ban or restrict any user at our discretion. Bans may be appealed through the proper channels.</p>
+                <h3 class="text-lg font-bold text-purple-400">7. Intellectual Property</h3>
+                <p>All content on this website is the property of Arktes Armada. Unauthorized use is prohibited.</p>
+                <h3 class="text-lg font-bold text-purple-400">8. Limitation of Liability</h3>
+                <p>Arktes Armada is not responsible for any damages arising from the use or inability to use our services.</p>
+                <h3 class="text-lg font-bold text-purple-400">9. Changes to Terms</h3>
+                <p>We reserve the right to modify these terms at any time. Continued use of the service constitutes acceptance of updated terms.</p>
+                <h3 class="text-lg font-bold text-purple-400">10. Contact</h3>
+                <p>For questions regarding these terms, contact us through Discord or via staff@arktesarmada.com</p>
+            </div>
+            <div class="flex items-center gap-4 mb-6">
+                <input type="checkbox" id="tos-checkbox" class="w-5 h-5 rounded border-gray-600 text-purple-600 focus:ring-purple-500 bg-black/40">
+                <label for="tos-checkbox" class="text-gray-300 text-sm cursor-pointer select-none">
+                    I have read and agree to the Terms of Service and Community Guidelines
+                </label>
+            </div>
+            <button onclick="acceptTOS()" id="tos-accept-btn" disabled class="w-full py-4 rounded-lg font-bold text-white transition-all bg-gray-700 cursor-not-allowed">
+                <i class="fas fa-check-circle mr-2"></i>Accept & Continue
+            </button>
+            <p class="text-center text-gray-500 text-xs mt-4">Last updated: April 1, 2026 | Version 2.0</p>
+        </div>
+    </div>
+
+    <!-- Global Announcement Banner -->
+    <div id="global-announcement-banner" class="announcement-banner hidden">
+        <div class="glass-panel p-4 rounded-xl border border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.3)]">
+            <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 border border-red-500/50">
+                    <i class="fas fa-bullhorn text-red-400"></i>
+                </div>
+                <div class="flex-1">
+                    <h4 id="announcement-title" class="text-lg font-bold text-white mb-1">Important Announcement</h4>
+                    <p id="announcement-body" class="text-gray-300 text-sm">Announcement content goes here...</p>
+                    <p id="announcement-time" class="text-gray-500 text-xs mt-2"></p>
+                </div>
+                <button onclick="closeAnnouncementBanner()" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification-container" class="fixed top-24 right-4 z-[9996] space-y-2"></div>
+
+    <!-- Ban Overlay -->
+    <div id="ban-overlay" class="fixed inset-0 z-[9999] bg-black/95 hidden items-center justify-center">
+        <div class="text-center p-8 max-w-2xl">
+            <i class="fas fa-ban text-8xl text-red-500 mb-6 animate-pulse"></i>
+            <h1 class="text-5xl font-display font-bold text-red-500 mb-4">ACCESS REVOKED</h1>
+            <p class="text-xl text-gray-300 mb-6">Your access to Arktes Armada has been suspended.</p>
+            <div id="ban-reason-display" class="bg-red-900/30 border border-red-500/50 p-4 rounded-lg mb-6 text-red-300"></div>
+            <button onclick="openBanAppeal()" class="btn-primary px-8 py-3 rounded-lg font-bold text-white mr-4">Submit Appeal</button>
+            <button onclick="logoutUser()" class="px-8 py-3 border border-gray-600 rounded-lg font-bold text-gray-400 hover:text-white hover:border-white transition-all">Logout</button>
+        </div>
+    </div>
+
+    <!-- Background -->
+    <div class="fixed inset-0 z-[-1] bg-grid pointer-events-none"></div>
+    <div class="fixed top-0 left-0 w-full h-full z-[-2] overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 rounded-full blur-[150px] animate-pulse"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-violet-800/10 rounded-full blur-[150px] animate-pulse" style="animation-delay: 2s;"></div>
+    </div>
+
+    <!-- Discord Status Bar (top-left) -->
+    <div class="fixed top-24 left-4 z-50 glass-panel px-4 py-2 rounded-full text-xs font-bold flex items-center gap-3 border border-[#5865F2]/30">
+        <i class="fab fa-discord text-[#5865F2]"></i>
+        <div class="flex items-center gap-2">
+            <span class="discord-status-dot status-online live-indicator discord-live-badge"></span>
+            <span id="discord-online-count" class="text-green-400">Loading...</span>
+        </div>
+        <span class="text-gray-500">|</span>
+        <span class="text-gray-400">Total: <span id="discord-total-count" class="text-white">--</span></span>
+        <button onclick="refreshDiscordStats()" title="Refresh" class="ml-1 text-[#5865F2] hover:text-white transition-colors">
+            <i class="fas fa-sync-alt text-xs" id="discord-refresh-icon"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                    <span class="font-display font-black text-2xl tracking-tighter text-white group-hover:text-purple-400 transition-colors">
+                        ARKTES <span class="text-purple-500 text-glow">ARMADA</span>
+                    </span>
+                    <div class="text-xs text-gray-500 tracking-widest">TACTICAL EXCELLENCE</div>
+                </div>
+                <div class="hidden lg:flex items-center space-x-1">
+                    <a href="#about" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all text-sm font-medium">About</a>
+                    <a href="#tournaments" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all text-sm font-medium">Tournaments</a>
+                    <a href="#matches" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all text-sm font-medium">Matches</a>
+                    <a href="#brackets" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all text-sm font-medium">Brackets</a>
+                    <a href="#staff" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all text-sm font-medium">Staff</a>
+                    <a href="#apply" class="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all text-sm font-medium">Apply</a>
+                    <button onclick="openStatsSearch()" class="ml-2 px-4 py-2 bg-orange-600/20 border border-orange-500/50 text-orange-400 rounded-lg hover:bg-orange-600/40 transition-all text-sm font-bold flex items-center gap-2">
+                        <i class="fas fa-chart-bar"></i> Stats
+                    </button>
+                    <button onclick="openStaffLogin()" class="ml-2 px-4 py-2 bg-purple-600/20 border border-purple-500/50 text-purple-400 rounded-lg hover:bg-purple-600/40 transition-all text-sm font-bold flex items-center gap-2">
+                        <i class="fas fa-shield-alt"></i> Staff
+                    </button>
+                    <button onclick="toggleAIChat()" class="ml-2 px-4 py-2 bg-blue-600/20 border border-blue-500/50 text-blue-400 rounded-lg hover:bg-blue-600/40 transition-all text-sm font-bold flex items-center gap-2">
+                        <i class="fas fa-robot"></i> AI
+                    </button>
+                </div>
+                <div class="lg:hidden">
+                    <button onclick="toggleMobileMenu()" class="p-2 rounded-lg text-purple-400 hover:text-white hover:bg-purple-900/30 transition-all">
+                        <i class="fas fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="lg:hidden glass-panel border-t border-purple-900/30" id="mobile-menu">
+            <div class="px-4 py-4 space-y-2">
+                <a href="#about" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all">About</a>
+                <a href="#tournaments" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all">Tournaments</a>
+                <a href="#matches" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all">Matches</a>
+                <a href="#brackets" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all">Brackets</a>
+                <a href="#staff" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all">Staff</a>
+                <a href="#apply" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all">Apply</a>
+                <div class="pt-2 border-t border-gray-800 grid grid-cols-2 gap-2">
+                    <button onclick="closeMobileMenu(); openStatsSearch()" class="px-4 py-3 bg-orange-600/20 border border-orange-500/50 text-orange-400 rounded-lg text-center font-bold">
+                        <i class="fas fa-chart-bar mr-2"></i>Stats
+                    </button>
+                    <button onclick="closeMobileMenu(); openStaffLogin()" class="px-4 py-3 bg-purple-600/20 border border-purple-500/50 text-purple-400 rounded-lg text-center font-bold">
+                        <i class="fas fa-shield-alt mr-2"></i>Staff
+                    </button>
+                    <button onclick="closeMobileMenu(); toggleAIChat()" class="px-4 py-3 bg-blue-600/20 border border-blue-500/50 text-blue-400 rounded-lg text-center font-bold">
+                        <i class="fas fa-robot mr-2"></i>AI
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Stats Search Modal -->
+    <div id="stats-modal" class="fixed inset-0 z-[200] hidden bg-black/95 backdrop-blur-md">
+        <div class="h-full flex flex-col">
+            <div class="glass-nav border-b border-orange-500/30 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center border border-orange-500/50">
+                        <i class="fas fa-chart-bar text-orange-400"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-display font-bold text-white">Player Stats Lookup</h2>
+                        <p class="text-orange-400 text-xs">Powered by stats.cc</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="refreshStatsFrame()" class="px-4 py-2 bg-orange-600/20 border border-orange-500/50 text-orange-400 rounded-lg hover:bg-orange-600/40 transition-all text-sm font-bold flex items-center gap-2">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <button onclick="openStatsInNewTab()" class="px-4 py-2 bg-gray-700/50 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition-all text-sm font-bold flex items-center gap-2">
+                        <i class="fas fa-external-link-alt"></i> Open in New Tab
+                    </button>
+                    <button onclick="closeStatsSearch()" class="w-10 h-10 rounded-lg border border-gray-600 text-gray-400 hover:text-white hover:border-white transition-all flex items-center justify-center">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-1 relative bg-gray-900">
+                <iframe
+                    id="stats-frame"
+                    src="https://stats.cc/siege"
+                    class="w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                ></iframe>
+                <div id="stats-loading" class="absolute inset-0 bg-gray-900 flex items-center justify-center z-10">
+                    <div class="text-center">
+                        <div class="loading mb-4 w-12 h-12 border-4"></div>
+                        <p class="text-orange-400 font-bold text-lg">Loading stats.cc...</p>
+                        <p class="text-gray-500 text-sm mt-2">Connecting to Rainbow Six Siege stats database</p>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-panel border-t border-orange-500/20 px-4 py-3 flex items-center justify-between text-sm">
+                <div class="flex items-center gap-4 text-gray-400">
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-info-circle text-orange-400"></i>
+                        Search for any player by Ubisoft username
+                    </span>
+                </div>
+                <div class="flex items-center gap-2 text-gray-500">
+                    <span>External site:</span>
+                    <a href="https://stats.cc/siege" target="_blank" class="text-orange-400 hover:text-orange-300 font-bold">stats.cc/siege</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chat Widget -->
+    <div id="ai-chat-widget" class="fixed bottom-4 right-4 z-50 w-96 hidden">
+        <div class="glass-panel rounded-2xl border border-blue-500/30 shadow-2xl overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-900/50 to-purple-900/50 p-4 flex justify-between items-center border-b border-blue-500/30">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-400/50">
+                        <i class="fas fa-robot text-blue-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-sm">Arktes AI</h3>
+                        <p class="text-xs text-blue-400">Online 24/7</p>
+                    </div>
+                </div>
+                <button onclick="toggleAIChat()" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="ai-chat-messages" class="h-80 overflow-y-auto p-4 space-y-3 bg-black/40">
+                <div class="chat-message flex gap-3">
+                    <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 border border-blue-400/30">
+                        <i class="fas fa-robot text-blue-400 text-xs"></i>
+                    </div>
+                    <div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 text-sm text-gray-300 max-w-[80%]">
+                        Hello! I am the Arktes Armada AI assistant. I can help you with:<br><br>
+                        • Tournament information<br>
+                        • Staff applications<br>
+                        • General questions<br>
+                        • R6 tips and strategies<br>
+                        • Match schedules<br>
+                        • Team rosters<br><br>
+                        What can I help you with today?
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-blue-500/20 bg-black/40">
+                <form onsubmit="sendAIMessage(event)" class="flex gap-2">
+                    <input type="text" id="ai-input" class="flex-1 input-field rounded-lg px-4 py-2 text-sm" placeholder="Type your message...">
+                    <button type="submit" class="btn-primary px-4 py-2 rounded-lg text-white">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Staff Login Modal -->
+    <div id="staff-login-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md hidden">
+        <div class="glass-panel p-8 rounded-2xl max-w-md w-full mx-4 border border-purple-500/50 shadow-[0_0_50px_rgba(139,92,246,0.3)] modal-enter">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 mx-auto rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/50 mb-4">
+                    <i class="fas fa-shield-alt text-3xl text-purple-400"></i>
+                </div>
+                <h2 class="text-2xl font-display font-bold text-white">Secure Access</h2>
+                <p class="text-gray-400 text-sm mt-1">Staff Portal</p>
+            </div>
+            <form onsubmit="handleStaffLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                    <div class="relative">
+                        <i class="fas fa-user absolute left-3 top-3 text-gray-500"></i>
+                        <input type="text" id="staffUsername" required class="w-full input-field rounded-lg p-3 pl-10" placeholder="Enter credentials">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-3 top-3 text-gray-500"></i>
+                        <input type="password" id="staffPassword" required class="w-full input-field rounded-lg p-3 pl-10" placeholder="••••••••">
+                        <i class="fas fa-eye absolute right-3 top-3 text-gray-500 cursor-pointer hover:text-purple-400" onclick="togglePasswordVisibility()"></i>
+                    </div>
+                </div>
+                <button type="submit" id="loginBtn" class="w-full btn-primary text-white font-bold py-3 rounded-lg shadow-lg shadow-purple-900/50 flex items-center justify-center gap-2">
+                    <i class="fas fa-fingerprint"></i> Authenticate
+                </button>
+            </form>
+            <div id="login-error" class="mt-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm text-center hidden">
+                <i class="fas fa-exclamation-triangle mr-2"></i> Authentication failed
+            </div>
+            <button onclick="closeStaffLogin()" class="mt-4 w-full text-gray-400 hover:text-white text-sm transition-colors">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Staff Dashboard Modal -->
+    <div id="staff-dashboard-modal" class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-md overflow-y-auto">
+        <div class="min-h-screen p-4 lg:p-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-violet-700 flex items-center justify-center border-2 border-purple-400/50 shadow-lg shadow-purple-500/30">
+                            <i class="fas fa-crown text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-display font-bold text-white">Command Center</h2>
+                            <p class="text-purple-400 text-sm flex items-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                Administrator Access
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="showGlobalAnnouncementModal()" class="px-4 py-2 bg-red-600/20 border border-red-500/50 text-red-400 rounded-lg hover:bg-red-600/40 transition-all text-sm font-bold flex items-center gap-2">
+                            <i class="fas fa-broadcast-tower"></i> Global Alert
+                        </button>
+                        <button onclick="logoutStaff()" class="px-4 py-2 border border-gray-600 text-gray-400 rounded-lg hover:text-white hover:border-white transition-all text-sm font-bold">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                        </button>
+                        <button onclick="closeStaffDashboard()" class="w-10 h-10 rounded-lg border border-gray-600 text-gray-400 hover:text-white hover:border-white transition-all flex items-center justify-center">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dashboard Tabs -->
+                <div class="flex flex-wrap gap-2 mb-6 border-b border-gray-800 pb-4">
+                    <button onclick="switchDashboardTab('overview')" class="dash-tab active px-6 py-3 rounded-lg text-sm font-bold transition-all bg-purple-600/20 text-purple-400 border border-purple-500/50" data-tab="overview">
+                        <i class="fas fa-chart-line mr-2"></i>Overview
+                    </button>
+                    <button onclick="switchDashboardTab('announcements')" class="dash-tab px-6 py-3 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white hover:bg-white/5" data-tab="announcements">
+                        <i class="fas fa-bullhorn mr-2"></i>Announcements
+                    </button>
+                    <button onclick="switchDashboardTab('applications')" class="dash-tab px-6 py-3 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white hover:bg-white/5" data-tab="applications">
+                        <i class="fas fa-file-alt mr-2"></i>Applications <span id="app-badge" class="ml-2 px-2 py-0.5 bg-yellow-500/20 text-yellow-400 rounded-full text-xs">0</span>
+                    </button>
+                    <button onclick="switchDashboardTab('tournaments')" class="dash-tab px-6 py-3 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white hover:bg-white/5" data-tab="tournaments">
+                        <i class="fas fa-trophy mr-2"></i>Tournaments
+                    </button>
+                    <button onclick="switchDashboardTab('matches')" class="dash-tab px-6 py-3 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white hover:bg-white/5" data-tab="matches">
+                        <i class="fas fa-gamepad mr-2"></i>Matches
+                    </button>
+                    <button onclick="switchDashboardTab('bans')" class="dash-tab px-6 py-3 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white hover:bg-white/5" data-tab="bans">
+                        <i class="fas fa-ban mr-2"></i>Bans
+                    </button>
+                    <button onclick="switchDashboardTab('discord')" class="dash-tab px-6 py-3 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white hover:bg-white/5" data-tab="discord">
+                        <i class="fab fa-discord mr-2"></i>Discord Live
+                    </button>
+                </div>
+
+                <!-- Overview Panel -->
+                <div id="panel-overview" class="dashboard-panel active">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="glass-panel p-6 rounded-xl border border-[#5865F2]/30 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-4 opacity-10">
+                                <i class="fab fa-discord text-6xl text-[#5865F2]"></i>
+                            </div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="text-gray-400 text-sm flex items-center gap-2">
+                                        <i class="fab fa-discord text-[#5865F2]"></i> Discord Members
+                                    </p>
+                                    <h3 class="text-3xl font-bold text-white mt-1" id="stat-total">--</h3>
+                                    <p class="text-xs text-gray-500 mt-1">Live from Discord Widget API</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-lg bg-[#5865F2]/20 flex items-center justify-center border border-[#5865F2]/30">
+                                    <i class="fab fa-discord text-[#5865F2] text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex items-center gap-2 text-sm">
+                                <span class="discord-status-dot status-online"></span>
+                                <span class="text-green-400" id="stat-online">-- online</span>
+                            </div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border border-green-500/20">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="text-gray-400 text-sm">Online Members</p>
+                                    <h3 class="text-3xl font-bold text-white mt-1" id="stat-active">--</h3>
+                                </div>
+                                <div class="w-12 h-12 rounded-lg bg-green-500/20 flex items-center justify-center">
+                                    <i class="fas fa-signal text-green-400 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border border-blue-500/20">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="text-gray-400 text-sm">Pending Apps</p>
+                                    <h3 class="text-3xl font-bold text-white mt-1" id="stat-pending">0</h3>
+                                </div>
+                                <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                                    <i class="fas fa-clipboard-list text-blue-400 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="glass-panel p-6 rounded-xl border border-purple-500/20">
+                            <h3 class="text-lg font-bold text-white mb-4">Recent Activity</h3>
+                            <div class="space-y-3 max-h-64 overflow-y-auto" id="recent-activity">
+                                <div class="text-center text-gray-500 py-8">No recent activity</div>
+                            </div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border border-purple-500/20">
+                            <h3 class="text-lg font-bold text-white mb-4">System Status</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-3 bg-black/40 rounded-lg">
+                                    <span class="text-gray-300">Discord Widget API</span>
+                                    <span id="discord-api-status-display" class="text-green-400 flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Connected
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-black/40 rounded-lg">
+                                    <span class="text-gray-300">Ban System</span>
+                                    <span class="text-green-400 flex items-center gap-2">
+                                        <i class="fas fa-shield-alt"></i> Active
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-black/40 rounded-lg">
+                                    <span class="text-gray-300">Auto-Refresh</span>
+                                    <span class="text-blue-400 flex items-center gap-2">
+                                        <i class="fas fa-sync-alt"></i> Every 30s
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-black/40 rounded-lg">
+                                    <span class="text-gray-300">Last Updated</span>
+                                    <span class="text-gray-400 text-sm" id="last-updated-display">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcements Panel -->
+                <div id="panel-announcements" class="dashboard-panel">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="glass-panel p-6 rounded-xl border border-purple-500/20">
+                            <h3 class="text-lg font-bold text-white mb-4">Create Announcement</h3>
+                            <form onsubmit="createAnnouncement(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-300 mb-2">Title</label>
+                                    <input type="text" id="ann-title" required class="w-full input-field rounded-lg p-3">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-300 mb-2">Message</label>
+                                    <textarea id="ann-body" required rows="4" class="w-full input-field rounded-lg p-3"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-300 mb-2">Priority</label>
+                                    <select id="ann-priority" class="w-full input-field rounded-lg p-3">
+                                        <option value="low">Low</option>
+                                        <option value="normal" selected>Normal</option>
+                                        <option value="high">High</option>
+                                        <option value="urgent">Urgent</option>
+                                    </select>
+                                </div>
+                                <div class="flex items-center gap-2 p-3 bg-yellow-900/20 border border-yellow-500/30 rounded-lg">
+                                    <input type="checkbox" id="ann-global" class="w-4 h-4 rounded border-gray-600 text-purple-600 focus:ring-purple-500">
+                                    <label for="ann-global" class="text-sm text-yellow-400">
+                                        <i class="fas fa-globe mr-1"></i> Broadcast to all users (Global Alert)
+                                    </label>
+                                </div>
+                                <button type="submit" class="w-full btn-primary text-white font-bold py-3 rounded-lg">
+                                    <i class="fas fa-paper-plane mr-2"></i>Publish Announcement
+                                </button>
+                            </form>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border border-purple-500/20">
+                            <h3 class="text-lg font-bold text-white mb-4">Stored Announcements</h3>
+                            <div id="announcements-list" class="space-y-3 max-h-96 overflow-y-auto">
+                                <div class="text-center text-gray-500 py-8">No announcements yet</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Panel -->
+                <div id="panel-applications" class="dashboard-panel">
+                    <div class="glass-panel rounded-xl border border-purple-500/20 overflow-hidden">
+                        <div class="p-4 border-b border-gray-800">
+                            <div class="flex gap-2">
+                                <button onclick="filterApps('all')" class="app-filter active px-4 py-2 rounded-lg text-sm font-bold bg-purple-600/20 text-purple-400 border border-purple-500/50" data-filter="all">All</button>
+                                <button onclick="filterApps('pending')" class="app-filter px-4 py-2 rounded-lg text-sm font-bold text-gray-400 hover:text-white hover:bg-white/5" data-filter="pending">Pending</button>
+                                <button onclick="filterApps('approved')" class="app-filter px-4 py-2 rounded-lg text-sm font-bold text-gray-400 hover:text-white hover:bg-white/5" data-filter="approved">Approved</button>
+                                <button onclick="filterApps('rejected')" class="app-filter px-4 py-2 rounded-lg text-sm font-bold text-gray-400 hover:text-white hover:bg-white/5" data-filter="rejected">Rejected</button>
+                            </div>
+                        </div>
+                        <div id="applications-list" class="divide-y divide-gray-800">
+                            <div class="p-8 text-center text-gray-500">No applications yet</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tournaments Panel -->
+                <div id="panel-tournaments" class="dashboard-panel">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 glass-panel p-6 rounded-xl border border-purple-500/20">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-bold text-white">Tournament Calendar</h3>
+                                <button onclick="openAddTournamentModal()" class="px-4 py-2 bg-purple-600/20 border border-purple-500/50 text-purple-400 rounded-lg hover:bg-purple-600/40 transition-all text-sm">
+                                    <i class="fas fa-plus mr-2"></i>Add Event
+                                </button>
+                            </div>
+                            <div id="admin-calendar" class="grid grid-cols-7 gap-2 text-center">
+                                <p class="col-span-7 text-gray-500 text-sm py-4">Calendar view — use the public calendar section below</p>
+                            </div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border border-purple-500/20">
+                            <h3 class="text-lg font-bold text-white mb-4">Upcoming Events</h3>
+                            <div id="upcoming-events" class="space-y-3 max-h-96 overflow-y-auto">
+                                <p class="text-gray-500 text-sm">No upcoming events stored</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Matches Panel -->
+                <div id="panel-matches" class="dashboard-panel">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="glass-panel p-6 rounded-xl border border-purple-500/20">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-xl font-bold text-white">Record Match Result</h3>
+                                <button onclick="openAddMatchModal()" class="px-4 py-2 bg-purple-600/20 border border-purple-500/50 text-purple-400 rounded-lg hover:bg-purple-600/40 transition-all text-sm">
+                                    <i class="fas fa-plus mr-2"></i>Add Match
+                                </button>
+                            </div>
+                            <form onsubmit="recordMatchResult(event)" class="space-y-4">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm text-gray-300 mb-2">Team A</label>
+                                        <input type="text" id="match-team-a" required class="w-full input-field rounded-lg p-3" placeholder="Team name">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-300 mb-2">Team B</label>
+                                        <input type="text" id="match-team-b" required class="w-full input-field rounded-lg p-3" placeholder="Team name">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm text-gray-300 mb-2">Score A</label>
+                                        <input type="number" id="match-score-a" required min="0" class="w-full input-field rounded-lg p-3">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-300 mb-2">Score B</label>
+                                        <input type="number" id="match-score-b" required min="0" class="w-full input-field rounded-lg p-3">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-300 mb-2">Tournament/Event</label>
+                                    <input type="text" id="match-tournament" class="w-full input-field rounded-lg p-3" placeholder="Optional tournament name">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-300 mb-2">Notes</label>
+                                    <textarea id="match-notes" rows="2" class="w-full input-field rounded-lg p-3" placeholder="Map, MVPs, etc..."></textarea>
+                                </div>
+                                <button type="submit" class="w-full btn-primary text-white font-bold py-3 rounded-lg">
+                                    <i class="fas fa-save mr-2"></i>Record Result
+                                </button>
+                            </form>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border border-purple-500/20">
+                            <h3 class="text-xl font-bold text-white mb-4">Recent Matches</h3>
+                            <div id="admin-matches-list" class="space-y-3 max-h-96 overflow-y-auto">
+                                <p class="text-gray-500 text-sm">No matches recorded</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bans Panel -->
+                <div id="panel-bans" class="dashboard-panel">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        <div class="glass-panel p-6 rounded-xl border border-red-500/20">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-lg font-bold text-white">Active Bans</h4>
+                                <span class="text-2xl font-bold text-red-400" id="active-bans-count">0</span>
+                            </div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border border-purple-500/20">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-lg font-bold text-white">Shadow Bans</h4>
+                                <span class="text-2xl font-bold text-purple-400" id="shadow-bans-count">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-panel rounded-xl border border-red-500/20 overflow-hidden">
+                        <div class="p-4 border-b border-gray-800 flex flex-wrap justify-between items-center gap-4">
+                            <h3 class="text-lg font-bold text-white">Ban Management</h3>
+                            <div class="flex gap-2">
+                                <button onclick="openBanModal()" class="px-4 py-2 bg-red-600/20 border border-red-500/50 text-red-400 rounded-lg hover:bg-red-600/40 transition-all text-sm font-bold">
+                                    <i class="fas fa-ban mr-2"></i>Ban User
+                                </button>
+                                <button onclick="openShadowBanModal()" class="px-4 py-2 bg-purple-600/20 border border-purple-500/50 text-purple-400 rounded-lg hover:bg-purple-600/40 transition-all text-sm font-bold">
+                                    <i class="fas fa-ghost mr-2"></i>Shadow Ban
+                                </button>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-black/40 text-gray-400 text-xs uppercase">
+                                    <tr>
+                                        <th class="p-4">User</th>
+                                        <th class="p-4">Type</th>
+                                        <th class="p-4">Reason</th>
+                                        <th class="p-4">Date</th>
+                                        <th class="p-4">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bans-table" class="text-sm">
+                                    <tr><td colspan="5" class="p-8 text-center text-gray-500">No bans on record</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discord Live Panel -->
+                <div id="panel-discord" class="dashboard-panel">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="glass-panel p-6 rounded-xl border border-[#5865F2]/30">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-lg font-bold text-white flex items-center gap-3">
+                                    <i class="fab fa-discord text-[#5865F2]"></i> Live Server Stats
+                                </h3>
+                                <button onclick="refreshDiscordStats()" class="px-3 py-1 bg-[#5865F2]/20 border border-[#5865F2]/50 text-[#5865F2] rounded-lg text-sm hover:bg-[#5865F2]/40 transition-all">
+                                    <i class="fas fa-sync-alt mr-2"></i>Refresh
+                                </button>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="p-4 bg-black/40 rounded-lg border border-gray-800">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-400">Total Members</span>
+                                        <span class="text-2xl font-bold text-white" id="discord-detail-total">--</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-2">
+                                        <div class="bg-[#5865F2] h-2 rounded-full" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-black/40 rounded-lg border border-gray-800">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-400">Online Now (in Widget)</span>
+                                        <span class="text-2xl font-bold text-green-400" id="discord-detail-online">--</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-2">
+                                        <div id="discord-online-bar" class="bg-green-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-2">Note: Discord Widget only shows members with widget visibility enabled</p>
+                                </div>
+                                <div class="p-4 bg-[#5865F2]/10 border border-[#5865F2]/30 rounded-lg">
+                                    <p class="text-sm text-gray-400 mb-1">Data Source</p>
+                                    <p class="text-xs text-[#5865F2]">discord.com/api/guilds/{id}/widget.json</p>
+                                    <p class="text-xs text-gray-500 mt-1" id="discord-last-fetch">Last fetched: --</p>
+                                </div>
+                                <div class="p-4 bg-[#5865F2]/10 border border-[#5865F2]/30 rounded-lg">
+                                    <p class="text-sm text-gray-400 mb-2">Server Invite</p>
+                                    <a href="https://discord.gg/arktes" target="_blank" class="text-[#5865F2] hover:text-white transition-colors font-bold">
+                                        discord.gg/arktes <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border border-[#5865F2]/30">
+                            <h3 class="text-lg font-bold text-white mb-4">Members Visible in Widget</h3>
+                            <p class="text-xs text-gray-500 mb-4">Only members who have enabled widget visibility appear here</p>
+                            <div id="discord-members-preview" class="space-y-2 max-h-96 overflow-y-auto">
+                                <div class="text-center text-gray-500 py-8">
+                                    <div class="loading mb-2"></div>
+                                    <p>Loading Discord data...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Announcement Modal -->
+    <div id="global-announcement-modal" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-md hidden">
+        <div class="glass-panel p-8 rounded-2xl max-w-lg w-full mx-4 border border-red-500/50 shadow-[0_0_50px_rgba(239,68,68,0.3)] modal-enter">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 mx-auto rounded-full bg-red-500/20 flex items-center justify-center border border-red-500/50 mb-4 animate-pulse">
+                    <i class="fas fa-exclamation-triangle text-3xl text-red-400"></i>
+                </div>
+                <h2 class="text-2xl font-display font-bold text-white">GLOBAL ALERT</h2>
+                <p class="text-red-400 text-sm">Broadcasts to all users immediately</p>
+            </div>
+            <form onsubmit="sendGlobalAnnouncement(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Alert Title</label>
+                    <input type="text" id="global-ann-title" required class="w-full input-field rounded-lg p-3 border-red-500/50">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Message</label>
+                    <textarea id="global-ann-body" required rows="3" class="w-full input-field rounded-lg p-3 border-red-500/50"></textarea>
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeGlobalAnnouncementModal()" class="flex-1 px-4 py-3 border border-gray-600 text-gray-400 rounded-lg hover:text-white hover:border-white transition-all">Cancel</button>
+                    <button type="submit" class="flex-1 px-4 py-3 bg-red-600 hover:bg-red-500 text-white rounded-lg font-bold shadow-lg shadow-red-900/50">
+                        <i class="fas fa-broadcast-tower mr-2"></i>Broadcast
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ban User Modal -->
+    <div id="ban-modal" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-md hidden">
+        <div class="glass-panel p-8 rounded-2xl max-w-md w-full mx-4 border border-red-500/50 modal-enter">
+            <h2 class="text-2xl font-display font-bold text-white mb-6 flex items-center gap-3">
+                <i class="fas fa-ban text-red-500"></i> Ban User
+            </h2>
+            <form onsubmit="banUser(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Username/ID</label>
+                    <input type="text" id="ban-target" required class="w-full input-field rounded-lg p-3">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Reason</label>
+                    <select id="ban-reason-select" class="w-full input-field rounded-lg p-3 mb-2">
+                        <option value="cheating">Cheating/Hacking</option>
+                        <option value="harassment">Harassment</option>
+                        <option value="spam">Spamming</option>
+                        <option value="rules">Breaking Rules</option>
+                        <option value="toxicity">Toxic Behavior</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <textarea id="ban-reason-custom" rows="2" class="w-full input-field rounded-lg p-3 text-sm" placeholder="Additional details..."></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Duration</label>
+                    <select id="ban-duration" class="w-full input-field rounded-lg p-3">
+                        <option value="1h">1 Hour</option>
+                        <option value="24h">24 Hours</option>
+                        <option value="7d">7 Days</option>
+                        <option value="30d">30 Days</option>
+                        <option value="permanent">Permanent</option>
+                    </select>
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closeBanModal()" class="flex-1 px-4 py-3 border border-gray-600 text-gray-400 rounded-lg hover:text-white hover:border-white transition-all">Cancel</button>
+                    <button type="submit" class="flex-1 px-4 py-3 bg-red-600 hover:bg-red-500 text-white rounded-lg font-bold">
+                        <i class="fas fa-ban mr-2"></i>Ban User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Shadow Ban Modal -->
+    <div id="shadow-ban-modal" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-md hidden">
+        <div class="glass-panel p-8 rounded-2xl max-w-md w-full mx-4 border border-purple-500/50 modal-enter">
+            <h2 class="text-2xl font-display font-bold text-white mb-2 flex items-center gap-3">
+                <i class="fas fa-ghost text-purple-400"></i> Shadow Ban
+            </h2>
+            <p class="text-gray-400 text-sm mb-6">Invisible restriction — user can browse but won't be matched.</p>
+            <form onsubmit="shadowBanUser(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Username/ID</label>
+                    <input type="text" id="shadow-target" required class="w-full input-field rounded-lg p-3">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Reason (staff only)</label>
+                    <textarea id="shadow-reason" required rows="3" class="w-full input-field rounded-lg p-3 text-sm" placeholder="Internal reason..."></textarea>
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closeShadowBanModal()" class="flex-1 px-4 py-3 border border-gray-600 text-gray-400 rounded-lg hover:text-white hover:border-white transition-all">Cancel</button>
+                    <button type="submit" class="flex-1 px-4 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-bold">
+                        <i class="fas fa-ghost mr-2"></i>Shadow Ban
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ban Appeal Modal -->
+    <div id="ban-appeal-modal" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-md hidden">
+        <div class="glass-panel p-8 rounded-2xl max-w-lg w-full mx-4 border border-blue-500/50 modal-enter">
+            <h2 class="text-2xl font-display font-bold text-white mb-2">Ban Appeal</h2>
+            <p class="text-gray-400 text-sm mb-6">Submit your appeal — staff will review within 24–48 hours.</p>
+            <form onsubmit="submitBanAppeal(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Your Username</label>
+                    <input type="text" id="appeal-username" required class="w-full input-field rounded-lg p-3">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Why should your ban be lifted?</label>
+                    <textarea id="appeal-reason" required rows="4" class="w-full input-field rounded-lg p-3" placeholder="Explain your situation..."></textarea>
+                </div>
+                <button type="submit" class="w-full btn-primary text-white font-bold py-3 rounded-lg">
+                    <i class="fas fa-paper-plane mr-2"></i>Submit Appeal
+                </button>
+            </form>
+            <button onclick="closeBanAppeal()" class="mt-4 w-full text-gray-400 hover:text-white text-sm transition-colors">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Add Tournament Modal -->
+    <div id="add-tournament-modal" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-md hidden">
+        <div class="glass-panel p-8 rounded-2xl max-w-md w-full mx-4 border border-purple-500/50 modal-enter">
+            <h2 class="text-2xl font-display font-bold text-white mb-6 flex items-center gap-3">
+                <i class="fas fa-trophy text-yellow-400"></i> Add Tournament Event
+            </h2>
+            <form onsubmit="addTournamentEvent(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Event Title</label>
+                    <input type="text" id="event-title-input" required class="w-full input-field rounded-lg p-3">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Date</label>
+                    <input type="date" id="event-date-input" required class="w-full input-field rounded-lg p-3">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Time</label>
+                    <input type="text" id="event-time-input" placeholder="e.g. 8:00 PM EST" class="w-full input-field rounded-lg p-3">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Description</label>
+                    <textarea id="event-desc-input" rows="3" class="w-full input-field rounded-lg p-3"></textarea>
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeAddTournamentModal()" class="flex-1 px-4 py-3 border border-gray-600 text-gray-400 rounded-lg hover:text-white hover:border-white transition-all">Cancel</button>
+                    <button type="submit" class="flex-1 px-4 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-bold">
+                        <i class="fas fa-plus mr-2"></i>Add Event
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Match Modal -->
+    <div id="add-match-modal" class="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-md hidden">
+        <div class="glass-panel p-8 rounded-2xl max-w-md w-full mx-4 border border-purple-500/50 modal-enter">
+            <h2 class="text-2xl font-display font-bold text-white mb-6 flex items-center gap-3">
+                <i class="fas fa-gamepad text-purple-400"></i> Record Match
+            </h2>
+            <form onsubmit="recordMatchResult(event)" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-2">Team A</label>
+                        <input type="text" id="modal-team-a" required class="w-full input-field rounded-lg p-3">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-2">Team B</label>
+                        <input type="text" id="modal-team-b" required class="w-full input-field rounded-lg p-3">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-2">Score A</label>
+                        <input type="number" id="modal-score-a" required min="0" class="w-full input-field rounded-lg p-3">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-2">Score B</label>
+                        <input type="number" id="modal-score-b" required min="0" class="w-full input-field rounded-lg p-3">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Tournament</label>
+                    <input type="text" id="modal-tournament" class="w-full input-field rounded-lg p-3">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Notes</label>
+                    <textarea id="modal-notes" rows="2" class="w-full input-field rounded-lg p-3"></textarea>
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeAddMatchModal()" class="flex-1 px-4 py-3 border border-gray-600 text-gray-400 rounded-lg hover:text-white hover:border-white transition-all">Cancel</button>
+                    <button type="submit" class="flex-1 px-4 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-bold">
+                        <i class="fas fa-save mr-2"></i>Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ======================== MAIN CONTENT ======================== -->
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-sm font-bold tracking-widest uppercase mb-6 reveal">
+                <span class="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></span>
+                Elite R6 Competitive Community
+            </div>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-black text-white mb-6 tracking-tight reveal">
+                ARKTES <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-violet-400 to-fuchsia-400 text-glow">ARMADA</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400 font-light reveal">
+                Where tactical excellence meets competitive dominance. Join the most advanced Rainbow Six Siege community.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 reveal">
+                <a href="https://discord.gg/arktes" target="_blank" class="px-8 py-4 btn-primary text-white rounded-lg font-bold text-lg shadow-[0_0_30px_rgba(139,92,246,0.4)] flex items-center justify-center gap-3 group">
+                    <i class="fab fa-discord text-2xl group-hover:scale-110 transition-transform"></i>
+                    <div class="text-left">
+                        <div class="text-xs opacity-80">Join</div>
+                        <div>The Armada</div>
+                    </div>
+                </a>
+                <a href="#tournaments" class="px-8 py-4 glass-panel hover:bg-white/5 text-white rounded-lg font-bold text-lg transition-all border border-gray-700 hover:border-purple-500/50 flex items-center justify-center gap-2">
+                    <i class="fas fa-trophy text-yellow-400"></i>
+                    View Tournaments
+                </a>
+            </div>
+
+            <!-- Live Discord Counter Badge -->
+            <div class="mt-12 inline-flex items-center gap-6 glass-panel px-6 py-3 rounded-full border border-[#5865F2]/30 reveal">
+                <div class="flex items-center gap-2">
+                    <i class="fab fa-discord text-[#5865F2] text-xl"></i>
+                    <span class="text-gray-400 text-sm">Discord Server</span>
+                </div>
+                <div class="h-4 w-px bg-gray-700"></div>
+                <div class="flex items-center gap-2">
+                    <span class="discord-status-dot status-online live-indicator"></span>
+                    <span class="text-white font-bold" id="hero-online-count">--</span>
+                    <span class="text-gray-500 text-sm">online</span>
+                </div>
+                <div class="h-4 w-px bg-gray-700"></div>
+                <div class="flex items-center gap-2">
+                    <span class="text-white font-bold" id="hero-total-count">--</span>
+                    <span class="text-gray-500 text-sm">members</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">About Arktes Armada</h2>
+                <p class="text-gray-400 max-w-3xl mx-auto">A premier competitive community for Rainbow Six Siege players seeking to elevate their game through tournaments, scrims, and strategic development.</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-violet-500 mx-auto rounded-full mt-4"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-6 rounded-xl border border-purple-500/20 reveal">
+                    <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-trophy text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Competitive Tournaments</h3>
+                    <p class="text-gray-400 text-sm">Regular tournaments with structured brackets, prize pools, and professional casting.</p>
+                </div>
+                <div class="glass-panel p-6 rounded-xl border border-purple-500/20 reveal">
+                    <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Team Building</h3>
+                    <p class="text-gray-400 text-sm">Find teammates, form squads, and compete together in a supportive environment.</p>
+                </div>
+                <div class="glass-panel p-6 rounded-xl border border-purple-500/20 reveal">
+                    <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Skill Development</h3>
+                    <p class="text-gray-400 text-sm">Access coaching, strategy guides, and VOD reviews from experienced players.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tournament Brackets Section -->
+    <section id="brackets" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Live Brackets</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Real-time tournament brackets</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-violet-500 mx-auto rounded-full mt-4"></div>
+            </div>
+            <div class="glass-panel p-8 rounded-2xl border border-purple-500/20 reveal">
+                <div class="text-center text-gray-500 py-12">
+                    <i class="fas fa-sitemap text-5xl mb-4 opacity-30"></i>
+                    <p class="text-lg">No active bracket — check back during tournament events!</p>
+                    <a href="https://discord.gg/arktes" target="_blank" class="mt-4 inline-flex items-center gap-2 text-[#5865F2] hover:text-white transition-colors">
+                        <i class="fab fa-discord"></i> Join Discord for live updates
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Match Results Section -->
+    <section id="matches" class="py-20 bg-black/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Recent Matches</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Latest competitive results from our tournaments</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-violet-500 mx-auto rounded-full mt-4"></div>
+            </div>
+            <div id="matches-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                <!-- Matches will be loaded here -->
+                <div class="glass-panel p-6 rounded-xl border border-purple-500/20 text-center text-gray-500">
+                    <i class="fas fa-gamepad text-4xl mb-4 opacity-30"></i>
+                    <p>No matches recorded yet</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tournament Calendar Section -->
+    <section id="tournaments" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Tournament Calendar</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Click a date to see event details.</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-violet-500 mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <div class="glass-panel p-8 rounded-2xl border border-purple-500/20 reveal">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-white" id="calendar-month">April 2026</h3>
+                    <div class="flex gap-2">
+                        <button onclick="changeMonth(-1)" class="w-10 h-10 rounded-lg glass-panel hover:bg-white/5 flex items-center justify-center transition-all">
+                            <i class="fas fa-chevron-left text-purple-400"></i>
+                        </button>
+                        <button onclick="changeMonth(1)" class="w-10 h-10 rounded-lg glass-panel hover:bg-white/5 flex items-center justify-center transition-all">
+                            <i class="fas fa-chevron-right text-purple-400"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-7 gap-2 mb-2 text-center text-sm font-bold text-gray-500 uppercase tracking-wider">
+                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+                <div id="calendar-grid" class="grid grid-cols-7 gap-2"></div>
+            </div>
+
+            <!-- Event Details Popup -->
+            <div id="event-popup" class="hidden mt-6 glass-panel p-6 rounded-xl border border-purple-500/30 event-popup">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h4 class="text-xl font-bold text-white" id="event-popup-title">Event Title</h4>
+                        <p class="text-purple-400 text-sm" id="event-popup-date">Date</p>
+                    </div>
+                    <button onclick="closeEventPopup()" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <p class="text-gray-300 mb-4" id="event-popup-description"></p>
+                <div class="flex gap-2" id="event-popup-actions"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section id="staff" class="py-20 bg-black/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Command Structure</h2>
+                <p class="text-purple-400/80 text-lg font-medium mb-2">Meet the leadership team</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-violet-500 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Arktes (Owner) -->
+            <div class="mb-12 reveal">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-2 h-12 bg-yellow-400 rounded-full"></div>
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white">Arktes</h3>
+                        <p class="text-yellow-400 text-sm">Server Owner</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-6 max-w-md mx-auto">
+                    <div class="staff-card glass-panel p-6 rounded-xl rank-arktes">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center border-2 border-yellow-300">
+                                <span class="text-2xl font-bold text-black">AR</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white">Arktes</h4>
+                                <p class="text-yellow-400 text-sm font-bold">Owner</p>
+                                <p class="rank-label text-yellow-300">arktes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Iso -->
+            <div class="mb-12 reveal">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-2 h-12 bg-red-400 rounded-full"></div>
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white">Iso</h3>
+                        <p class="text-red-400 text-sm">Head of Operations</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-6 max-w-md mx-auto">
+                    <div class="staff-card glass-panel p-6 rounded-xl rank-iso">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center border-2 border-red-300">
+                                <span class="text-2xl font-bold text-white">IS</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white">Iso</h4>
+                                <p class="text-red-400 text-sm font-bold">Head of Operations</p>
+                                <p class="rank-label text-red-300">iso</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overseer -->
+            <div class="mb-12 reveal">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-2 h-12 bg-teal-400 rounded-full"></div>
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white">Overseer</h3>
+                        <p class="text-teal-400 text-sm">Community Oversight</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-6 max-w-md mx-auto">
+                    <div class="staff-card glass-panel p-6 rounded-xl rank-overseer">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center border-2 border-teal-300">
+                                <span class="text-2xl font-bold text-white">FO</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white">Foiri</h4>
+                                <p class="text-teal-400 text-sm font-bold">Overseer</p>
+                                <p class="rank-label text-teal-300">overseer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secretary -->
+            <div class="mb-12 reveal">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-2 h-12 bg-pink-400 rounded-full"></div>
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white">Secretary</h3>
+                        <p class="text-pink-400 text-sm">Administrative Support</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 gap-6 max-w-md mx-auto">
+                    <div class="staff-card glass-panel p-6 rounded-xl rank-secretary">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center border-2 border-pink-300">
+                                <span class="text-2xl font-bold text-white">XO</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white">Xou.</h4>
+                                <p class="text-pink-400 text-sm font-bold">Secretary</p>
+                                <p class="rank-label text-pink-300">secretary</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lead Staff -->
+            <div class="mb-12 reveal">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-2 h-12 bg-emerald-300 rounded-full"></div>
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white">Lead Staff</h3>
+                        <p class="text-emerald-300 text-sm">Department Leaders</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-lead-staff"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-300 to-emerald-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">CN</span></div><h4 class="text-sm font-bold text-white">cnr</h4><p class="rank-label text-emerald-200">lead staff</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-lead-staff"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-300 to-emerald-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">DO</span></div><h4 class="text-sm font-bold text-white">Dom</h4><p class="rank-label text-emerald-200">lead staff</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-lead-staff"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-300 to-emerald-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">IO</span></div><h4 class="text-sm font-bold text-white">IOIIIIII</h4><p class="rank-label text-emerald-200">lead staff</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-lead-staff"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-300 to-emerald-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">LX</span></div><h4 class="text-sm font-bold text-white">Lxrk</h4><p class="rank-label text-emerald-200">lead staff</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-lead-staff"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-300 to-emerald-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">MX</span></div><h4 class="text-sm font-bold text-white">Max</h4><p class="rank-label text-emerald-200">lead staff</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-lead-staff"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-300 to-emerald-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">ME</span></div><h4 class="text-sm font-bold text-white">meerkat</h4><p class="rank-label text-emerald-200">lead staff</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-lead-staff"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-300 to-emerald-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">OG</span></div><h4 class="text-sm font-bold text-white">The OG Xela</h4><p class="rank-label text-emerald-200">lead staff</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-lead-staff"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-300 to-emerald-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">UG</span></div><h4 class="text-sm font-bold text-white">Unprofessional Gambler</h4><p class="rank-label text-emerald-200">lead staff</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-lead-staff"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-300 to-emerald-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">XC</span></div><h4 class="text-sm font-bold text-white">XCLR8</h4><p class="rank-label text-emerald-200">lead staff</p></div></div>
+                </div>
+            </div>
+
+            <!-- Council -->
+            <div class="mb-12 reveal">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-2 h-12 bg-emerald-200 rounded-full"></div>
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white">Council</h3>
+                        <p class="text-emerald-200 text-sm">Senior Staff Members</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-council"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-200 to-emerald-400 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">DX</span></div><h4 class="text-sm font-bold text-white">Dxdger</h4><p class="text-emerald-200 text-xs">Staff Manager</p><p class="rank-label text-emerald-100">council</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-council"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-200 to-emerald-400 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">GX</span></div><h4 class="text-sm font-bold text-white">Gxld.NZ</h4><p class="rank-label text-emerald-100">council</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-council"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-200 to-emerald-400 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">IH</span></div><h4 class="text-sm font-bold text-white">iheadix</h4><p class="rank-label text-emerald-100">council</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-council"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-200 to-emerald-400 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">NI</span></div><h4 class="text-sm font-bold text-white">Night</h4><p class="rank-label text-emerald-100">council</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-council"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-200 to-emerald-400 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">RZ</span></div><h4 class="text-sm font-bold text-white">rzvuc</h4><p class="rank-label text-emerald-100">council</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-council"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-200 to-emerald-400 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">VO</span></div><h4 class="text-sm font-bold text-white">Void</h4><p class="rank-label text-emerald-100">council</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-council"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-200 to-emerald-400 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">VV</span></div><h4 class="text-sm font-bold text-white">vvampz.RF</h4><p class="rank-label text-emerald-100">council</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-council"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-emerald-200 to-emerald-400 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">XD</span></div><h4 class="text-sm font-bold text-white">xDeadshot</h4><p class="rank-label text-emerald-100">council</p></div></div>
+                </div>
+            </div>
+
+            <!-- Council Deputy -->
+            <div class="mb-12 reveal">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-2 h-12 bg-indigo-300 rounded-full"></div>
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white">Council Deputy</h3>
+                        <p class="text-indigo-300 text-sm">Assistant Council Members</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-council-deputy"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-indigo-300 to-indigo-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">GC</span></div><h4 class="text-sm font-bold text-white">GasCapz</h4><p class="rank-label text-indigo-200">council deputy</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-council-deputy"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-indigo-300 to-indigo-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">KA</span></div><h4 class="text-sm font-bold text-white">katsu</h4><p class="rank-label text-indigo-200">council deputy</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-council-deputy"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-indigo-300 to-indigo-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">M4</span></div><h4 class="text-sm font-bold text-white">M4tteww</h4><p class="rank-label text-indigo-200">council deputy</p></div></div>
+                </div>
+            </div>
+
+            <!-- Director -->
+            <div class="mb-12 reveal">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-2 h-12 bg-yellow-300 rounded-full"></div>
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white">Director</h3>
+                        <p class="text-yellow-300 text-sm">Department Directors</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-director"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-yellow-300 to-yellow-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">GI</span></div><h4 class="text-sm font-bold text-white">Glitefing</h4><p class="rank-label text-yellow-200">director</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-director"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-yellow-300 to-yellow-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">ST</span></div><h4 class="text-sm font-bold text-white">stinkypuh</h4><p class="rank-label text-yellow-200">director</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-director"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-yellow-300 to-yellow-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">SC</span></div><h4 class="text-sm font-bold text-white">supercharged.CT</h4><p class="rank-label text-yellow-200">director</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-director"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-yellow-300 to-yellow-500 flex items-center justify-center mb-2"><span class="text-lg font-bold text-black">YO</span></div><h4 class="text-sm font-bold text-white">Yoboytrippin</h4><p class="rank-label text-yellow-200">director</p></div></div>
+                </div>
+            </div>
+
+            <!-- Executive -->
+            <div class="mb-12 reveal">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-2 h-12 bg-green-400 rounded-full"></div>
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white">Executive</h3>
+                        <p class="text-green-400 text-sm">Executive Team</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-executive"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">BL</span></div><h4 class="text-sm font-bold text-white">BLITZ MrGaming</h4><p class="rank-label text-green-300">executive</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-executive"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">CD</span></div><h4 class="text-sm font-bold text-white">Cdawg</h4><p class="rank-label text-green-300">executive</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-executive"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">IJ</span></div><h4 class="text-sm font-bold text-white">itz.jards</h4><p class="rank-label text-green-300">executive</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-executive"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">PU</span></div><h4 class="text-sm font-bold text-white">Puugloaf</h4><p class="rank-label text-green-300">executive</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-executive"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">TR</span></div><h4 class="text-sm font-bold text-white">Tranco</h4><p class="rank-label text-green-300">executive</p></div></div>
+                    <div class="staff-card glass-panel p-4 rounded-xl rank-executive"><div class="text-center"><div class="w-12 h-12 mx-auto rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">ZA</span></div><h4 class="text-sm font-bold text-white">Zacrou</h4><p class="rank-label text-green-300">executive</p></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Section -->
+    <section id="apply" class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-white mb-4">Join The Armada</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Apply to become a member of our competitive community</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-violet-500 mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <div class="glass-panel p-8 rounded-2xl border border-purple-500/20 reveal">
+                <!-- Application Type Selector -->
+                <div class="mb-8">
+                    <label class="block text-sm font-medium text-gray-300 mb-4 text-center">Select Application Type</label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <button type="button" onclick="setApplicationType('member')" id="btn-member" class="app-type-btn active px-6 py-4 rounded-xl border-2 border-purple-500 bg-purple-500/20 text-white font-bold transition-all">
+                            <i class="fas fa-user-plus mb-2 block text-2xl"></i>Community Member
+                        </button>
+                        <button type="button" onclick="setApplicationType('staff')" id="btn-staff" class="app-type-btn px-6 py-4 rounded-xl border-2 border-gray-700 hover:border-purple-500/50 text-gray-400 font-bold transition-all">
+                            <i class="fas fa-shield-alt mb-2 block text-2xl"></i>Staff Position
+                        </button>
+                        <button type="button" onclick="setApplicationType('support')" id="btn-support" class="app-type-btn px-6 py-4 rounded-xl border-2 border-gray-700 hover:border-purple-500/50 text-gray-400 font-bold transition-all">
+                            <i class="fas fa-headset mb-2 block text-2xl"></i>Support Staff
+                        </button>
+                    </div>
+                </div>
+
+                <form id="application-form" onsubmit="submitApplication(event)" class="space-y-6">
+                    <input type="hidden" id="app-type" name="type" value="member">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Discord Username</label>
+                            <input type="text" name="discord" required class="w-full input-field rounded-lg p-3" placeholder="username#0000">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Ubisoft Username</label>
+                            <input type="text" name="ubisoft" required class="w-full input-field rounded-lg p-3" placeholder="Your Uplay name">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Age</label>
+                        <input type="number" name="age" required min="16" max="99" class="w-full input-field rounded-lg p-3" placeholder="Must be 16 or older">
+                    </div>
+
+                    <!-- Member fields -->
+                    <div id="member-fields">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Current Rank</label>
+                                <select name="rank" class="w-full input-field rounded-lg p-3">
+                                    <option value="">Select your current rank</option>
+                                    <option value="copper">Copper</option>
+                                    <option value="bronze">Bronze</option>
+                                    <option value="silver">Silver</option>
+                                    <option value="gold">Gold</option>
+                                    <option value="platinum">Platinum</option>
+                                    <option value="diamond">Diamond</option>
+                                    <option value="champion">Champion</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Why do you want to join?</label>
+                                <textarea name="reason" rows="4" class="w-full input-field rounded-lg p-3" placeholder="Tell us about yourself..."></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Previous competitive experience</label>
+                                <textarea name="experience" rows="3" class="w-full input-field rounded-lg p-3" placeholder="Previous teams, tournaments, etc..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Staff fields (hidden by default) -->
+                    <div id="staff-fields" class="hidden space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Position Applying For</label>
+                            <select name="staff_position" class="w-full input-field rounded-lg p-3">
+                                <option value="">Select position</option>
+                                <option value="executive">Executive</option>
+                                <option value="director">Director</option>
+                                <option value="council_deputy">Council Deputy</option>
+                                <option value="council">Council</option>
+                                <option value="lead_staff">Lead Staff</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Why do you want to join staff?</label>
+                            <textarea name="staff_reason" rows="4" class="w-full input-field rounded-lg p-3" placeholder="What can you bring to the team?"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Previous staff experience</label>
+                            <textarea name="staff_experience" rows="3" class="w-full input-field rounded-lg p-3" placeholder="Any previous staff or moderation experience..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Hours available per week</label>
+                            <input type="number" name="hours_available" min="1" max="168" class="w-full input-field rounded-lg p-3">
+                        </div>
+                    </div>
+
+                    <!-- Support fields (hidden by default) -->
+                    <div id="support-fields" class="hidden space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Support Role</label>
+                            <select name="support_role" class="w-full input-field rounded-lg p-3">
+                                <option value="">Select role</option>
+                                <option value="tournament_support">Tournament Support</option>
+                                <option value="technical_support">Technical Support</option>
+                                <option value="community_support">Community Support</option>
+                                <option value="event_coordinator">Event Coordinator</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Why do you want to join support staff?</label>
+                            <textarea name="support_reason" rows="4" class="w-full input-field rounded-lg p-3"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Availability</label>
+                            <input type="text" name="availability" class="w-full input-field rounded-lg p-3" placeholder="e.g., Weekdays 6PM-10PM EST">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" name="agreement" required class="w-5 h-5 rounded border-gray-600 text-purple-600 focus:ring-purple-500 bg-black/40">
+                        <label class="text-gray-300 text-sm">I agree to follow all community rules and guidelines</label>
+                    </div>
+                    <button type="submit" class="w-full btn-primary text-white font-bold py-4 rounded-lg text-lg">
+                        <i class="fas fa-paper-plane mr-2"></i>Submit Application
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/50 border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <span class="font-display font-black text-xl text-white">ARKTES <span class="text-purple-500">ARMADA</span></span>
+                    <p class="text-gray-500 text-sm mt-2">Elite R6 Competitive Community</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#tournaments" class="hover:text-purple-400 transition-colors">Tournaments</a></li>
+                        <li><a href="#matches" class="hover:text-purple-400 transition-colors">Matches</a></li>
+                        <li><a href="#staff" class="hover:text-purple-400 transition-colors">Staff</a></li>
+                        <li><a href="#apply" class="hover:text-purple-400 transition-colors">Apply</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" onclick="openStatsSearch(); return false;" class="hover:text-purple-400 transition-colors">Player Stats</a></li>
+                        <li><a href="#" onclick="toggleAIChat(); return false;" class="hover:text-purple-400 transition-colors">AI Assistant</a></li>
+                        <li><a href="https://discord.gg/arktes" target="_blank" class="hover:text-purple-400 transition-colors">Discord Server</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Connect</h4>
+                    <div class="flex gap-4">
+                        <a href="https://discord.gg/arktes" target="_blank" class="w-10 h-10 rounded-lg bg-[#5865F2]/20 flex items-center justify-center border border-[#5865F2]/30 hover:bg-[#5865F2]/40 transition-all">
+                            <i class="fab fa-discord text-[#5865F2]"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center border border-blue-500/30 hover:bg-blue-500/40 transition-all">
+                            <i class="fab fa-twitter text-blue-400"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center border border-red-500/30 hover:bg-red-500/40 transition-all">
+                            <i class="fab fa-youtube text-red-400"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2026 Arktes Armada. All rights reserved. | <a href="#" onclick="showTOS(); return false;" class="hover:text-purple-400">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======================== JAVASCRIPT ======================== -->
+    <script>
+    // ==================== DISCORD GUILD CONFIG ====================
+    // Your server's Guild ID - REPLACE THIS WITH YOUR ACTUAL DISCORD SERVER ID
+    const DISCORD_GUILD_ID = '1140415348504530955';
+
+    // ==================== DISCORD LIVE MEMBER COUNT ====================
+    // Uses the Discord Widget JSON API — no auth needed, CORS allowed by Discord.
+    // NOTE: Your server must have the Discord Widget ENABLED in Server Settings > Widget.
+    // The "presence_count" field = members currently online (accurate server-wide count).
+    // The "members" array only shows members who have Widget visibility turned on.
+
+    let discordData = { online: null, total: null };
+    let discordRefreshTimer = null;
+
+    async function refreshDiscordStats() {
+        // Spin the refresh icon
+        const icon = document.getElementById('discord-refresh-icon');
+        if (icon) icon.classList.add('fa-spin');
+
+        const url = `https://discord.com/api/guilds/${DISCORD_GUILD_ID}/widget.json`;
+
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (!response.ok) {
+                // Widget not enabled — handle gracefully
+                if (response.status === 403 || response.status === 404) {
+                    console.warn('Discord Widget is not enabled for this server. Enable it in Server Settings > Widget.');
+                    setDiscordStatus('Widget Disabled', null, true);
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                return;
+            }
+
+            const data = await response.json();
+
+            // presence_count = total online members (reliable, server-wide)
+            const onlineCount = data.presence_count || 0;
+            // members array = only those with widget visibility on (use for avatars only)
+            const visibleMembers = data.members || [];
+            // approximate_member_count is not in widget JSON — we track separately
+            // Use a stored total if we have one, or display online only
+            const storedTotal = localStorage.getItem('arktes_discord_total');
+
+            discordData.online = onlineCount;
+            // Widget API doesn't give total count — display online count prominently
+            // and note that total requires bot access or invite link stats
+            updateDiscordDisplayLive(onlineCount, storedTotal, visibleMembers);
+
+            // Update last-fetched time
+            const now = new Date().toLocaleTimeString();
+            const lastFetchEl = document.getElementById('discord-last-fetch');
+            if (lastFetchEl) lastFetchEl.textContent = `Last fetched: ${now}`;
+            const lastUpdEl = document.getElementById('last-updated-display');
+            if (lastUpdEl) lastUpdEl.textContent = now;
+
+            // Mark API as connected
+            const statusEl = document.getElementById('discord-api-status-display');
+            if (statusEl) statusEl.innerHTML = '<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse inline-block mr-2"></span>Connected';
+
+        } catch (err) {
+            console.error('Discord Widget fetch error:', err);
+            setDiscordStatus('Error', null, true);
+
+            const statusEl = document.getElementById('discord-api-status-display');
+            if (statusEl) statusEl.innerHTML = '<span class="w-2 h-2 bg-red-500 rounded-full inline-block mr-2"></span><span class="text-red-400">Widget Unreachable</span>';
+        } finally {
+            if (icon) icon.classList.remove('fa-spin');
+        }
+    }
+
+    function updateDiscordDisplayLive(online, totalStored, members) {
+        const onlineStr = online !== null ? online.toLocaleString() : '--';
+        const totalStr = totalStored ? parseInt(totalStored).toLocaleString() : '—';
+
+        // Top-left bar
+        const onlineCountEl = document.getElementById('discord-online-count');
+        if (onlineCountEl) onlineCountEl.textContent = `${onlineStr} online`;
+
+        const totalCountEl = document.getElementById('discord-total-count');
+        if (totalCountEl) totalCountEl.textContent = totalStr;
+
+        // Hero section
+        const heroOnline = document.getElementById('hero-online-count');
+        if (heroOnline) heroOnline.textContent = onlineStr;
+
+        const heroTotal = document.getElementById('hero-total-count');
+        if (heroTotal) heroTotal.textContent = totalStr;
+
+        // Dashboard overview
+        const statTotal = document.getElementById('stat-total');
+        if (statTotal) statTotal.textContent = totalStr;
+
+        const statOnline = document.getElementById('stat-online');
+        if (statOnline) statOnline.textContent = `${onlineStr} online`;
+
+        const statActive = document.getElementById('stat-active');
+        if (statActive) statActive.textContent = onlineStr;
+
+        // Discord Live panel
+        const detailTotal = document.getElementById('discord-detail-total');
+        if (detailTotal) detailTotal.textContent = totalStr;
+
+        const detailOnline = document.getElementById('discord-detail-online');
+        if (detailOnline) detailOnline.textContent = onlineStr;
+
+        // Online percentage bar (based on visible members vs total if available)
+        if (totalStored && online) {
+            const pct = Math.min(100, (online / parseInt(totalStored)) * 100);
+            const bar = document.getElementById('discord-online-bar');
+            if (bar) bar.style.width = pct + '%';
+        }
+
+        // Members preview (widget-visible only)
+        updateMembersPreview(members, online);
+    }
+
+    function setDiscordStatus(label, total, isError) {
+        const onlineCountEl = document.getElementById('discord-online-count');
+        if (onlineCountEl) {
+            onlineCountEl.textContent = isError ? 'Enable Widget' : label;
+            onlineCountEl.className = isError ? 'text-yellow-400' : 'text-green-400';
+        }
+
+        // Show helpful message in members panel
+        const preview = document.getElementById('discord-members-preview');
+        if (preview && isError) {
+            preview.innerHTML = `
+                <div class="p-4 bg-yellow-900/20 border border-yellow-500/30 rounded-lg text-sm">
+                    <p class="text-yellow-400 font-bold mb-2"><i class="fas fa-exclamation-triangle mr-2"></i>Widget Not Enabled</p>
+                    <p class="text-gray-400 mb-3">To show live member counts, enable the Discord Widget:</p>
+                    <ol class="text-gray-400 space-y-1 list-decimal list-inside text-xs">
+                        <li>Open your Discord Server Settings</li>
+                        <li>Go to <strong class="text-white">Widget</strong></li>
+                        <li>Toggle <strong class="text-white">Enable Server Widget</strong> ON</li>
+                        <li>Click Refresh above</li>
+                    </ol>
+                </div>
+            `;
+        }
+    }
+
+    function updateMembersPreview(members, totalOnline) {
+        const container = document.getElementById('discord-members-preview');
+        if (!container) return;
+
+        if (!members || members.length === 0) {
+            container.innerHTML = `
+                <div class="p-4 text-center text-gray-500">
+                    <i class="fab fa-discord text-3xl mb-2 text-[#5865F2] opacity-50"></i>
+                    <p class="text-sm">No members visible in widget</p>
+                    <p class="text-xs text-gray-600 mt-1">Members must enable widget visibility in their Discord privacy settings</p>
+                    <p class="text-xs text-green-400 mt-2 font-bold">${totalOnline !== null ? totalOnline.toLocaleString() + ' members currently online' : ''}</p>
+                </div>
+            `;
+            return;
+        }
+
+        let html = members.slice(0, 20).map(m => {
+            const status = m.status || 'online';
+            const avatarUrl = m.avatar_url || '';
+            const initials = (m.username || '?').substring(0, 2).toUpperCase();
+            return `
+                <div class="flex items-center gap-3 p-2 bg-black/40 rounded-lg">
+                    ${avatarUrl
+                        ? `<img src="${avatarUrl}" class="w-8 h-8 rounded-full border border-gray-700" alt="" onerror="this.style.display='none'">`
+                        : `<div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-xs font-bold flex-shrink-0">${initials}</div>`
+                    }
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-white truncate">${escapeHtml(m.username || 'Unknown')}</p>
+                        <p class="text-xs text-gray-500 capitalize">${status}</p>
+                    </div>
+                    <span class="discord-status-dot status-${status} flex-shrink-0"></span>
+                </div>
+            `;
+        }).join('');
+
+        if (members.length > 20) {
+            html += `<p class="text-center text-gray-500 text-xs py-2">Showing 20 of ${members.length} visible members</p>`;
+        }
+
+        container.innerHTML = html;
+    }
+
+    // Auto-refresh every 30 seconds
+    function startDiscordAutoRefresh() {
+        if (discordRefreshTimer) clearInterval(discordRefreshTimer);
+        discordRefreshTimer = setInterval(refreshDiscordStats, 30000);
+    }
+
+    // ==================== NOTIFICATION SYSTEM ====================
+    function showNotification(title, message, type = 'info') {
+        const container = document.getElementById('notification-container');
+        if (!container) return;
+
+        const colors = {
+            info: 'border-blue-500/50 bg-blue-500/10 text-blue-400',
+            success: 'border-green-500/50 bg-green-500/10 text-green-400',
+            warning: 'border-yellow-500/50 bg-yellow-500/10 text-yellow-400',
+            error: 'border-red-500/50 bg-red-500/10 text-red-400'
+        };
+
+        const icons = {
+            info: 'fa-info-circle',
+            success: 'fa-check-circle',
+            warning: 'fa-exclamation-triangle',
+            error: 'fa-times-circle'
+        };
+
+        const id = 'notif-' + Date.now();
+        const notif = document.createElement('div');
+        notif.id = id;
+        notif.className = `notification-toast glass-panel p-4 rounded-xl border ${colors[type]} max-w-sm`;
+        notif.innerHTML = `
+            <div class="flex items-start gap-3">
+                <i class="fas ${icons[type]} mt-1"></i>
+                <div class="flex-1">
+                    <h4 class="font-bold text-white text-sm">${escapeHtml(title)}</h4>
+                    <p class="text-gray-300 text-xs mt-1">${escapeHtml(message)}</p>
+                </div>
+                <button onclick="dismissNotification('${id}')" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `;
+
+        container.appendChild(notif);
+
+        // Auto-dismiss after 5 seconds
+        setTimeout(() => dismissNotification(id), 5000);
+    }
+
+    function dismissNotification(id) {
+        const notif = document.getElementById(id);
+        if (notif) {
+            notif.classList.add('hiding');
+            setTimeout(() => notif.remove(), 300);
+        }
+    }
+
+    // ==================== TOS ====================
+    function checkTOS() {
+        const tosAccepted = localStorage.getItem('arktes_tos_accepted');
+        if (!tosAccepted) {
+            document.getElementById('tos-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    document.getElementById('tos-checkbox').addEventListener('change', function() {
+        const btn = document.getElementById('tos-accept-btn');
+        if (this.checked) {
+            btn.disabled = false;
+            btn.classList.remove('bg-gray-700', 'cursor-not-allowed');
+            btn.classList.add('btn-primary');
+        } else {
+            btn.disabled = true;
+            btn.classList.add('bg-gray-700', 'cursor-not-allowed');
+            btn.classList.remove('btn-primary');
+        }
+    });
+
+    function acceptTOS() {
+        localStorage.setItem('arktes_tos_accepted', 'true');
+        localStorage.setItem('arktes_tos_date', new Date().toISOString());
+        document.getElementById('tos-modal').style.display = 'none';
+        document.body.style.overflow = '';
+        checkGlobalAnnouncements();
+        showNotification('Welcome!', 'You have successfully accepted the Terms of Service.', 'success');
+    }
+
+    function showTOS() {
+        document.getElementById('tos-modal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    // ==================== GLOBAL ANNOUNCEMENTS ====================
+    function saveGlobalAnnouncement(announcement) {
+        const announcements = JSON.parse(localStorage.getItem('arktes_global_announcements') || '[]');
+        announcement.id = Date.now();
+        announcement.timestamp = new Date().toISOString();
+        announcements.push(announcement);
+        if (announcements.length > 10) announcements.shift();
+        localStorage.setItem('arktes_global_announcements', JSON.stringify(announcements));
+        localStorage.setItem('arktes_latest_announcement', JSON.stringify(announcement));
+    }
+
+    function checkGlobalAnnouncements() {
+        const lastShown = localStorage.getItem('arktes_last_announcement_shown');
+        const latest = localStorage.getItem('arktes_latest_announcement');
+        if (latest) {
+            const announcement = JSON.parse(latest);
+            if (!lastShown || lastShown !== String(announcement.id)) {
+                showAnnouncementBanner(announcement);
+            }
+        }
+    }
+
+    function showAnnouncementBanner(announcement) {
+        const banner = document.getElementById('global-announcement-banner');
+        document.getElementById('announcement-title').textContent = announcement.title;
+        document.getElementById('announcement-body').textContent = announcement.body;
+        document.getElementById('announcement-time').textContent = 'Posted: ' + new Date(announcement.timestamp).toLocaleString();
+        banner.classList.remove('hidden');
+        localStorage.setItem('arktes_last_announcement_shown', String(announcement.id));
+    }
+
+    function closeAnnouncementBanner() {
+        const banner = document.getElementById('global-announcement-banner');
+        banner.classList.add('closing');
+        setTimeout(() => { banner.classList.add('hidden'); banner.classList.remove('closing'); }, 300);
+    }
+
+    function showGlobalAnnouncementModal() {
+        document.getElementById('global-announcement-modal').classList.remove('hidden');
+    }
+
+    function closeGlobalAnnouncementModal() {
+        document.getElementById('global-announcement-modal').classList.add('hidden');
+    }
+
+    function sendGlobalAnnouncement(e) {
+        e.preventDefault();
+        const announcement = {
+            title: document.getElementById('global-ann-title').value,
+            body: document.getElementById('global-ann-body').value,
+            priority: 'urgent',
+            global: true
+        };
+        saveGlobalAnnouncement(announcement);
+        showAnnouncementBanner(announcement);
+        localStorage.setItem('arktes_announcement_broadcast', Date.now());
+        showNotification('Success', 'Global announcement broadcast to all users!', 'success');
+        closeGlobalAnnouncementModal();
+        document.getElementById('global-ann-title').value = '';
+        document.getElementById('global-ann-body').value = '';
+    }
+
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'arktes_announcement_broadcast') checkGlobalAnnouncements();
+    });
+
+    // ==================== NAVIGATION ====================
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
+        menu.classList.toggle('open');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+    }
+
+    function closeMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
+        menu.classList.remove('open');
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+    }
+
+    // ==================== STATS MODAL ====================
+    function openStatsSearch() {
+        document.getElementById('stats-modal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        const iframe = document.getElementById('stats-frame');
+        const loading = document.getElementById('stats-loading');
+        iframe.onload = function() {
+            loading.style.display = 'none';
+            iframe.classList.add('loaded');
+        };
+    }
+
+    function closeStatsSearch() {
+        document.getElementById('stats-modal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    function refreshStatsFrame() {
+        const iframe = document.getElementById('stats-frame');
+        const loading = document.getElementById('stats-loading');
+        iframe.classList.remove('loaded');
+        loading.style.display = 'flex';
+        iframe.src = iframe.src;
+    }
+
+    function openStatsInNewTab() {
+        window.open('https://stats.cc/siege', '_blank');
+    }
+
+    // ==================== AI CHAT ====================
+    const aiResponses = {
+        greetings: ['hello', 'hi', 'hey', 'sup', 'yo', 'greetings'],
+        tournament: ['tournament', 'competition', 'bracket', 'match', 'event', 'compete'],
+        staff: ['staff', 'apply', 'application', 'join team', 'moderator', 'admin'],
+        support: ['support', 'help', 'ticket', 'issue', 'problem', 'assist'],
+        stats: ['stats', 'rank', 'mmr', 'kd', 'win rate', 'profile', 'k/d'],
+        rules: ['rules', 'tos', 'terms', 'guidelines', 'ban', 'punishment', 'violation'],
+        discord: ['discord', 'server', 'invite', 'join discord', 'dc'],
+        r6: ['r6', 'siege', 'rainbow', 'operator', 'map', 'strategy', 'tip', 'guide'],
+        matches: ['match', 'result', 'score', 'game', 'recent', 'history'],
+        calendar: ['calendar', 'schedule', 'date', 'when', 'upcoming']
+    };
+
+    const aiKnowledgeBase = {
+        greetings: [
+            "Hello! Welcome to Arktes Armada! How can I assist you today?",
+            "Hey there! Ready to dominate in R6? What do you need?",
+            "Greetings, operator! How can I help you today?"
+        ],
+        tournament: [
+            "We host regular tournaments! Check the Tournament Calendar for upcoming events. Click on any date with an event to see details.",
+            "To join a tournament: 1) Check the calendar 2) Click a date for details 3) Register on Discord at discord.gg/arktes",
+            "Our tournaments feature structured brackets, prizes, and professional casting. Join our Discord for registration!"
+        ],
+        staff: [
+            "Interested in staff? Go to the Apply section and select 'Staff Position'. We look for dedicated, mature players.",
+            "Staff positions include Executive, Director, Council, Council Deputy, and Lead Staff. Each has different responsibilities.",
+            "To apply for staff, fill out the application form with your experience and availability. Our team will review it within 48 hours."
+        ],
+        support: [
+            "Need help? Join our Discord or submit a Support Staff application.",
+            "Support staff handle tournament issues, technical problems, and community questions.",
+            "For immediate assistance, join discord.gg/arktes and ask in the support channel."
+        ],
+        stats: [
+            "Check R6 stats using the Stats button in the navigation — powered by stats.cc! You can search any player by their Ubisoft username.",
+            "Want to check your stats? Click the Stats button in the top menu to open stats.cc and search for your profile.",
+            "We use stats.cc for player statistics. It shows your rank, K/D, win rate, and match history."
+        ],
+        rules: [
+            "Our rules: No cheating, no harassment, follow Discord ToS, maintain competitive integrity. See the Terms of Service for full details.",
+            "Rule violations can result in warnings, temp bans, or permanent bans. We take competitive integrity seriously!",
+            "Key rules: 1) No cheating/hacking 2) No harassment 3) No doxing 4) Follow Discord ToS 5) No NSFW content"
+        ],
+        discord: [
+            "Join our Discord! Click 'Join The Armada' or use: discord.gg/arktes",
+            "Our Discord is where all the action happens — tournaments, scrims, LFG, and community events!",
+            "discord.gg/arktes — that's where you'll find team formation, tournament registration, and live match updates."
+        ],
+        r6: [
+            "Rainbow Six Siege is our game! We host scrims, tournaments, and offer coaching.",
+            "Tips: 1) Map knowledge is crucial 2) Learn operator utility 3) Communication wins games 4) Crosshair placement matters",
+            "Looking for teammates? Join our Discord and check the LFG channels!"
+        ],
+        matches: [
+            "Check the Recent Matches section to see the latest competitive results from our tournaments.",
+            "Match results are posted after each tournament. You can view scores, teams, and MVPs in the Matches section.",
+            "Want to see past results? Scroll down to the Recent Matches section on the main page!"
+        ],
+        calendar: [
+            "Click on any date in the Tournament Calendar to see if there are events scheduled.",
+            "Dates with a purple border have events. Click them to see details!",
+            "The calendar shows all upcoming tournaments and community events. Click a date to view details."
+        ],
+        default: [
+            "I can help with: tournaments, staff applications, stats, rules, Discord, R6 tips, and match schedules. What do you need?",
+            "I'm not sure I understand. Try asking about: tournaments, applying to staff, Discord server, R6 stats, or community rules.",
+            "For complex questions, contact staff on Discord at discord.gg/arktes or submit an application through the website."
+        ]
+    };
+
+    function toggleAIChat() {
+        const widget = document.getElementById('ai-chat-widget');
+        widget.classList.toggle('hidden');
+        if (!widget.classList.contains('hidden')) {
+            document.getElementById('ai-input').focus();
+        }
+    }
+
+    function getAIResponse(message) {
+        const lower = message.toLowerCase();
+        
+        // Check for exact matches first
+        for (const [cat, keywords] of Object.entries(aiResponses)) {
+            if (keywords.some(k => lower.includes(k))) {
+                const arr = aiKnowledgeBase[cat];
+                return arr[Math.floor(Math.random() * arr.length)];
+            }
+        }
+        
+        const d = aiKnowledgeBase.default;
+        return d[Math.floor(Math.random() * d.length)];
+    }
+
+    function sendAIMessage(e) {
+        e.preventDefault();
+        const input = document.getElementById('ai-input');
+        const message = input.value.trim();
+        if (!message) return;
+        
+        const msgs = document.getElementById('ai-chat-messages');
+        msgs.innerHTML += `<div class="chat-message flex gap-3 justify-end"><div class="bg-purple-500/20 border border-purple-500/30 rounded-lg p-3 text-sm text-white max-w-[80%]">${escapeHtml(message)}</div><div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 border border-purple-400/30"><i class="fas fa-user text-purple-400 text-xs"></i></div></div>`;
+        input.value = '';
+        msgs.scrollTop = msgs.scrollHeight;
+        
+        const typingId = 'typing-' + Date.now();
+        msgs.innerHTML += `<div id="${typingId}" class="chat-message flex gap-3"><div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 border border-blue-400/30"><i class="fas fa-robot text-blue-400 text-xs"></i></div><div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 text-sm text-gray-300"><span class="typing-indicator"><span>.</span><span>.</span><span>.</span></span></div></div>`;
+        msgs.scrollTop = msgs.scrollHeight;
+        
+        setTimeout(() => {
+            const el = document.getElementById(typingId);
+            if (el) el.remove();
+            msgs.innerHTML += `<div class="chat-message flex gap-3"><div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 border border-blue-400/30"><i class="fas fa-robot text-blue-400 text-xs"></i></div><div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 text-sm text-gray-300 max-w-[80%]">${getAIResponse(message)}</div></div>`;
+            msgs.scrollTop = msgs.scrollHeight;
+        }, 900 + Math.random() * 400);
+    }
+
+    function escapeHtml(text) {
+        const d = document.createElement('div');
+        d.textContent = text;
+        return d.innerHTML;
+    }
+
+    // ==================== STAFF LOGIN ====================
+    function openStaffLogin() {
+        document.getElementById('staff-login-modal').classList.remove('hidden');
+    }
+
+    function closeStaffLogin() {
+        document.getElementById('staff-login-modal').classList.add('hidden');
+        document.getElementById('login-error').classList.add('hidden');
+    }
+
+    function togglePasswordVisibility() {
+        const pw = document.getElementById('staffPassword');
+        pw.type = pw.type === 'password' ? 'text' : 'password';
+    }
+
+    function handleStaffLogin(e) {
+        e.preventDefault();
+        const u = document.getElementById('staffUsername').value;
+        const p = document.getElementById('staffPassword').value;
+        if (u === 'admin' && p === 'arktes2026') {
+            localStorage.setItem('arktes_staff_logged_in', 'true');
+            localStorage.setItem('arktes_staff_user', u);
+            closeStaffLogin();
+            openStaffDashboard();
+            showNotification('Welcome', 'Successfully logged into Staff Dashboard', 'success');
+        } else {
+            document.getElementById('login-error').classList.remove('hidden');
+        }
+    }
+
+    // ==================== STAFF DASHBOARD ====================
+    function openStaffDashboard() {
+        document.getElementById('staff-dashboard-modal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        loadDashboardData();
+    }
+
+    function closeStaffDashboard() {
+        document.getElementById('staff-dashboard-modal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    function logoutStaff() {
+        localStorage.removeItem('arktes_staff_logged_in');
+        localStorage.removeItem('arktes_staff_user');
+        closeStaffDashboard();
+        showNotification('Logged Out', 'You have been logged out of the staff dashboard', 'info');
+    }
+
+    function logoutUser() {
+        document.getElementById('ban-overlay').classList.add('hidden');
+    }
+
+    function switchDashboardTab(tab) {
+        document.querySelectorAll('.dash-tab').forEach(btn => {
+            btn.classList.remove('active', 'bg-purple-600/20', 'text-purple-400', 'border', 'border-purple-500/50');
+            btn.classList.add('text-gray-400');
+        });
+        const activeBtn = document.querySelector(`[data-tab="${tab}"]`);
+        if (activeBtn) {
+            activeBtn.classList.add('active', 'bg-purple-600/20', 'text-purple-400', 'border', 'border-purple-500/50');
+            activeBtn.classList.remove('text-gray-400');
+        }
+        document.querySelectorAll('.dashboard-panel').forEach(p => p.classList.remove('active'));
+        const panel = document.getElementById(`panel-${tab}`);
+        if (panel) panel.classList.add('active');
+
+        if (tab === 'applications') loadApplicationsList();
+        if (tab === 'announcements') loadAnnouncementsList();
+        if (tab === 'bans') loadBansTable();
+        if (tab === 'discord') refreshDiscordStats();
+        if (tab === 'matches') loadAdminMatchesList();
+    }
+
+    function loadDashboardData() {
+        refreshDiscordStats();
+        const apps = JSON.parse(localStorage.getItem('arktes_applications') || '[]');
+        const pendingCount = apps.filter(a => a.status === 'pending').length;
+        const appBadge = document.getElementById('app-badge');
+        if (appBadge) appBadge.textContent = pendingCount;
+        const statPending = document.getElementById('stat-pending');
+        if (statPending) statPending.textContent = pendingCount;
+        const bans = JSON.parse(localStorage.getItem('arktes_bans') || '[]');
+        const activeBans = document.getElementById('active-bans-count');
+        if (activeBans) activeBans.textContent = bans.filter(b => b.active && b.type === 'ban').length;
+        const shadowBans = document.getElementById('shadow-bans-count');
+        if (shadowBans) shadowBans.textContent = bans.filter(b => b.active && b.type === 'shadow').length;
+        loadAnnouncementsList();
+        loadApplicationsList();
+        loadBansTable();
+        loadAdminMatchesList();
+    }
+
+    // ==================== APPLICATIONS ====================
+    function setApplicationType(type) {
+        document.getElementById('app-type').value = type;
+        document.querySelectorAll('.app-type-btn').forEach(btn => {
+            btn.classList.remove('active', 'border-purple-500', 'bg-purple-500/20', 'text-white');
+            btn.classList.add('border-gray-700', 'text-gray-400');
+        });
+        const activeBtn = document.getElementById(`btn-${type}`);
+        if (activeBtn) {
+            activeBtn.classList.add('active', 'border-purple-500', 'bg-purple-500/20', 'text-white');
+            activeBtn.classList.remove('border-gray-700', 'text-gray-400');
+        }
+        document.getElementById('member-fields').classList.add('hidden');
+        document.getElementById('staff-fields').classList.add('hidden');
+        document.getElementById('support-fields').classList.add('hidden');
+        if (type === 'member') document.getElementById('member-fields').classList.remove('hidden');
+        else if (type === 'staff') document.getElementById('staff-fields').classList.remove('hidden');
+        else if (type === 'support') document.getElementById('support-fields').classList.remove('hidden');
+    }
+
+    function submitApplication(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const type = formData.get('type');
+        const application = {
+            id: Date.now(),
+            type: type,
+            discord: formData.get('discord'),
+            ubisoft: formData.get('ubisoft'),
+            age: formData.get('age'),
+            status: 'pending',
+            date: new Date().toISOString(),
+            reason: formData.get('reason') || formData.get('staff_reason') || formData.get('support_reason') || ''
+        };
+        const apps = JSON.parse(localStorage.getItem('arktes_applications') || '[]');
+        apps.push(application);
+        localStorage.setItem('arktes_applications', JSON.stringify(apps));
+        const typeNames = { member: 'Community Member', staff: 'Staff', support: 'Support Staff' };
+        showNotification('Application Submitted', `Your ${typeNames[type]} application has been submitted! We will contact you via Discord.`, 'success');
+        e.target.reset();
+        setApplicationType('member');
+    }
+
+    function filterApps(filter) {
+        document.querySelectorAll('.app-filter').forEach(btn => {
+            btn.classList.remove('active', 'bg-purple-600/20', 'text-purple-400', 'border', 'border-purple-500/50');
+            btn.classList.add('text-gray-400');
+        });
+        const activeBtn = document.querySelector(`[data-filter="${filter}"]`);
+        if (activeBtn) {
+            activeBtn.classList.add('active', 'bg-purple-600/20', 'text-purple-400', 'border', 'border-purple-500/50');
+            activeBtn.classList.remove('text-gray-400');
+        }
+        loadApplicationsList(filter);
+    }
+
+    function loadApplicationsList(filter = 'all') {
+        const apps = JSON.parse(localStorage.getItem('arktes_applications') || '[]');
+        const filtered = filter === 'all' ? apps : apps.filter(a => a.status === filter);
+        const container = document.getElementById('applications-list');
+        if (!container) return;
+        if (filtered.length === 0) {
+            container.innerHTML = `<div class="p-8 text-center text-gray-500">No ${filter === 'all' ? '' : filter + ' '}applications</div>`;
+            return;
+        }
+        container.innerHTML = filtered.map(app => `
+            <div class="p-4 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <p class="font-bold text-white">${escapeHtml(app.discord)}</p>
+                    <p class="text-gray-400 text-sm">${escapeHtml(app.ubisoft)} • Age ${escapeHtml(app.age)} • ${app.type}</p>
+                    <p class="text-gray-500 text-xs">${new Date(app.date).toLocaleString()}</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-1 text-xs rounded ${app.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' : app.status === 'approved' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}">${app.status}</span>
+                    ${app.status === 'pending' ? `
+                        <button onclick="updateAppStatus(${app.id}, 'approved')" class="px-3 py-1 bg-green-600/20 border border-green-500/50 text-green-400 rounded text-xs hover:bg-green-600/40">Approve</button>
+                        <button onclick="updateAppStatus(${app.id}, 'rejected')" class="px-3 py-1 bg-red-600/20 border border-red-500/50 text-red-400 rounded text-xs hover:bg-red-600/40">Reject</button>
+                    ` : ''}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function updateAppStatus(id, status) {
+        const apps = JSON.parse(localStorage.getItem('arktes_applications') || '[]');
+        const idx = apps.findIndex(a => a.id === id);
+        if (idx !== -1) {
+            apps[idx].status = status;
+            localStorage.setItem('arktes_applications', JSON.stringify(apps));
+            loadApplicationsList();
+            loadDashboardData();
+            showNotification('Status Updated', `Application ${status}`, 'success');
+        }
+    }
+
+    // ==================== ANNOUNCEMENTS ====================
+    function createAnnouncement(e) {
+        e.preventDefault();
+        const announcement = {
+            id: Date.now(),
+            title: document.getElementById('ann-title').value,
+            body: document.getElementById('ann-body').value,
+            priority: document.getElementById('ann-priority').value,
+            global: document.getElementById('ann-global').checked,
+            timestamp: new Date().toISOString()
+        };
+        const announcements = JSON.parse(localStorage.getItem('arktes_announcements') || '[]');
+        announcements.push(announcement);
+        localStorage.setItem('arktes_announcements', JSON.stringify(announcements));
+        if (announcement.global) {
+            saveGlobalAnnouncement(announcement);
+            localStorage.setItem('arktes_announcement_broadcast', Date.now());
+        }
+        showNotification('Announcement Created', announcement.global ? 'Global announcement broadcast!' : 'Announcement saved', 'success');
+        e.target.reset();
+        loadAnnouncementsList();
+    }
+
+    function loadAnnouncementsList() {
+        const announcements = JSON.parse(localStorage.getItem('arktes_announcements') || '[]');
+        const container = document.getElementById('announcements-list');
+        if (!container) return;
+        if (announcements.length === 0) {
+            container.innerHTML = '<div class="text-center text-gray-500 py-8">No announcements yet</div>';
+            return;
+        }
+        container.innerHTML = [...announcements].reverse().map(ann => `
+            <div class="p-4 bg-black/40 rounded-lg border border-gray-800">
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-bold text-white">${escapeHtml(ann.title)}</h4>
+                    <span class="text-xs px-2 py-1 rounded ${ann.priority === 'urgent' ? 'bg-red-500/20 text-red-400' : 'bg-purple-500/20 text-purple-400'}">${ann.priority}</span>
+                </div>
+                <p class="text-gray-400 text-sm mb-2">${escapeHtml(ann.body)}</p>
+                <div class="flex justify-between text-xs text-gray-500">
+                    <span>${new Date(ann.timestamp).toLocaleString()}</span>
+                    ${ann.global ? '<span class="text-yellow-400"><i class="fas fa-globe mr-1"></i>Global</span>' : ''}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // ==================== BAN SYSTEM ====================
+    function openBanModal() { document.getElementById('ban-modal').classList.remove('hidden'); }
+    function closeBanModal() { document.getElementById('ban-modal').classList.add('hidden'); }
+    function openShadowBanModal() { document.getElementById('shadow-ban-modal').classList.remove('hidden'); }
+    function closeShadowBanModal() { document.getElementById('shadow-ban-modal').classList.add('hidden'); }
+    function openBanAppeal() { document.getElementById('ban-appeal-modal').classList.remove('hidden'); }
+    function closeBanAppeal() { document.getElementById('ban-appeal-modal').classList.add('hidden'); }
+
+    function banUser(e) {
+        e.preventDefault();
+        const target = document.getElementById('ban-target').value;
+        const reason = document.getElementById('ban-reason-select').value;
+        const custom = document.getElementById('ban-reason-custom').value;
+        const duration = document.getElementById('ban-duration').value;
+        const ban = {
+            id: Date.now(),
+            target: target,
+            reason: reason + (custom ? ': ' + custom : ''),
+            duration: duration,
+            active: true,
+            date: new Date().toISOString(),
+            type: 'ban'
+        };
+        const bans = JSON.parse(localStorage.getItem('arktes_bans') || '[]');
+        bans.push(ban);
+        localStorage.setItem('arktes_bans', JSON.stringify(bans));
+        showNotification('User Banned', `User "${target}" has been banned.`, 'success');
+        closeBanModal();
+        loadBansTable();
+        loadDashboardData();
+    }
+
+    function shadowBanUser(e) {
+        e.preventDefault();
+        const target = document.getElementById('shadow-target').value;
+        const reason = document.getElementById('shadow-reason').value;
+        const ban = {
+            id: Date.now(),
+            target: target,
+            reason: reason,
+            active: true,
+            date: new Date().toISOString(),
+            type: 'shadow'
+        };
+        const bans = JSON.parse(localStorage.getItem('arktes_bans') || '[]');
+        bans.push(ban);
+        localStorage.setItem('arktes_bans', JSON.stringify(bans));
+        showNotification('Shadow Ban Applied', `User "${target}" has been shadow banned.`, 'success');
+        closeShadowBanModal();
+        loadBansTable();
+        loadDashboardData();
+    }
+
+    function submitBanAppeal(e) {
+        e.preventDefault();
+        showNotification('Appeal Submitted', 'Ban appeal submitted. Staff will review within 24–48 hours.', 'success');
+        closeBanAppeal();
+    }
+
+    function unbanUser(id) {
+        const bans = JSON.parse(localStorage.getItem('arktes_bans') || '[]');
+        const idx = bans.findIndex(b => b.id === id);
+        if (idx !== -1) {
+            bans[idx].active = false;
+            localStorage.setItem('arktes_bans', JSON.stringify(bans));
+            loadBansTable();
+            loadDashboardData();
+            showNotification('User Unbanned', 'Ban has been lifted', 'success');
+        }
+    }
+
+    function loadBansTable() {
+        const bans = JSON.parse(localStorage.getItem('arktes_bans') || '[]');
+        const tbody = document.getElementById('bans-table');
+        if (!tbody) return;
+        const activeBans = bans.filter(b => b.active);
+        if (activeBans.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-gray-500">No active bans</td></tr>';
+            return;
+        }
+        tbody.innerHTML = activeBans.map(ban => `
+            <tr class="border-t border-gray-800 hover:bg-white/5">
+                <td class="p-4 font-medium text-white">${escapeHtml(ban.target)}</td>
+                <td class="p-4"><span class="px-2 py-1 text-xs rounded ${ban.type === 'shadow' ? 'bg-purple-500/20 text-purple-400' : 'bg-red-500/20 text-red-400'}">${ban.type}</span></td>
+                <td class="p-4 text-gray-400 text-sm max-w-[200px] truncate">${escapeHtml(ban.reason)}</td>
+                <td class="p-4 text-gray-400 text-sm">${new Date(ban.date).toLocaleDateString()}</td>
+                <td class="p-4"><button onclick="unbanUser(${ban.id})" class="px-3 py-1 bg-green-600/20 border border-green-500/50 text-green-400 rounded text-xs hover:bg-green-600/40">Unban</button></td>
+            </tr>
+        `).join('');
+    }
+
+    // ==================== MATCH SYSTEM ====================
+    function openAddMatchModal() {
+        document.getElementById('add-match-modal').classList.remove('hidden');
+    }
+
+    function closeAddMatchModal() {
+        document.getElementById('add-match-modal').classList.add('hidden');
+    }
+
+    function recordMatchResult(e) {
+        if (e) e.preventDefault();
+        
+        const teamA = document.getElementById('modal-team-a')?.value || document.getElementById('match-team-a')?.value;
+        const teamB = document.getElementById('modal-team-b')?.value || document.getElementById('match-team-b')?.value;
+        const scoreA = document.getElementById('modal-score-a')?.value || document.getElementById('match-score-a')?.value;
+        const scoreB = document.getElementById('modal-score-b')?.value || document.getElementById('match-score-b')?.value;
+        const tournament = document.getElementById('modal-tournament')?.value || document.getElementById('match-tournament')?.value || '';
+        const notes = document.getElementById('modal-notes')?.value || document.getElementById('match-notes')?.value || '';
+
+        if (!teamA || !teamB || scoreA === '' || scoreB === '') {
+            showNotification('Error', 'Please fill in all required fields', 'error');
+            return;
+        }
+
+        const match = {
+            id: Date.now(),
+            teamA: teamA,
+            teamB: teamB,
+            scoreA: parseInt(scoreA),
+            scoreB: parseInt(scoreB),
+            tournament: tournament,
+            notes: notes,
+            date: new Date().toISOString(),
+            winner: parseInt(scoreA) > parseInt(scoreB) ? teamA : teamB
+        };
+
+        const matches = JSON.parse(localStorage.getItem('arktes_matches') || '[]');
+        matches.unshift(match);
+        if (matches.length > 50) matches.pop(); // Keep last 50 matches
+        localStorage.setItem('arktes_matches', JSON.stringify(matches));
+
+        showNotification('Match Recorded', `${teamA} vs ${teamB} has been saved`, 'success');
+        closeAddMatchModal();
+        loadMatchesList();
+        loadAdminMatchesList();
+
+        // Clear form
+        if (document.getElementById('modal-team-a')) document.getElementById('modal-team-a').value = '';
+        if (document.getElementById('modal-team-b')) document.getElementById('modal-team-b').value = '';
+        if (document.getElementById('modal-score-a')) document.getElementById('modal-score-a').value = '';
+        if (document.getElementById('modal-score-b')) document.getElementById('modal-score-b').value = '';
+    }
+
+    function loadMatchesList() {
+        const container = document.getElementById('matches-container');
+        if (!container) return;
+        
+        const matches = JSON.parse(localStorage.getItem('arktes_matches') || '[]');
+        
+        if (matches.length === 0) {
+            container.innerHTML = `
+                <div class="glass-panel p-6 rounded-xl border border-purple-500/20 text-center text-gray-500 col-span-full">
+                    <i class="fas fa-gamepad text-4xl mb-4 opacity-30"></i>
+                    <p>No matches recorded yet</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = matches.slice(0, 6).map(match => `
+            <div class="match-card">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs text-gray-400">${new Date(match.date).toLocaleDateString()}</span>
+                    ${match.tournament ? `<span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">${escapeHtml(match.tournament)}</span>` : ''}
+                </div>
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="team-logo">${match.teamA.substring(0, 2).toUpperCase()}</div>
+                        <span class="font-bold ${match.scoreA > match.scoreB ? 'text-white' : 'text-gray-400'}">${escapeHtml(match.teamA)}</span>
+                    </div>
+                    <span class="score-display ${match.scoreA > match.scoreB ? 'text-green-400' : 'text-gray-500'}">${match.scoreA}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="team-logo">${match.teamB.substring(0, 2).toUpperCase()}</div>
+                        <span class="font-bold ${match.scoreB > match.scoreA ? 'text-white' : 'text-gray-400'}">${escapeHtml(match.teamB)}</span>
+                    </div>
+                    <span class="score-display ${match.scoreB > match.scoreA ? 'text-green-400' : 'text-gray-500'}">${match.scoreB}</span>
+                </div>
+                ${match.notes ? `<p class="text-xs text-gray-500 mt-3 pt-3 border-t border-gray-800">${escapeHtml(match.notes)}</p>` : ''}
+            </div>
+        `).join('');
+    }
+
+    function loadAdminMatchesList() {
+        const container = document.getElementById('admin-matches-list');
+        if (!container) return;
+        
+        const matches = JSON.parse(localStorage.getItem('arktes_matches') || '[]');
+        
+        if (matches.length === 0) {
+            container.innerHTML = '<p class="text-gray-500 text-sm">No matches recorded</p>';
+            return;
+        }
+
+        container.innerHTML = matches.map(match => `
+            <div class="p-4 bg-black/40 rounded-lg border border-gray-800">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <p class="font-bold text-white">${escapeHtml(match.teamA)} vs ${escapeHtml(match.teamB)}</p>
+                        <p class="text-gray-400 text-sm">${match.scoreA} - ${match.scoreB}</p>
+                    </div>
+                    <span class="text-xs text-gray-500">${new Date(match.date).toLocaleDateString()}</span>
+                </div>
+                ${match.tournament ? `<p class="text-xs text-purple-400">${escapeHtml(match.tournament)}</p>` : ''}
+            </div>
+        `).join('');
+    }
+
+    // ==================== TOURNAMENT CALENDAR ====================
+    let currentMonth = new Date();
+    let calendarEvents = {};
+
+    function loadCalendarEvents() {
+        const saved = localStorage.getItem('arktes_calendar_events');
+        if (saved) {
+            calendarEvents = JSON.parse(saved);
+        }
+    }
+
+    function saveCalendarEvents() {
+        localStorage.setItem('arktes_calendar_events', JSON.stringify(calendarEvents));
+    }
+
+    function changeMonth(delta) {
+        currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + delta, 1);
+        renderCalendar();
+    }
+
+    function renderCalendar() {
+        const year = currentMonth.getFullYear();
+        const month = currentMonth.getMonth();
+        const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        const monthEl = document.getElementById('calendar-month');
+        if (monthEl) monthEl.textContent = `${monthNames[month]} ${year}`;
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const today = new Date();
+
+        let html = '';
+        for (let i = 0; i < firstDay; i++) {
+            html += '<div class="calendar-day empty p-3 rounded-lg"></div>';
+        }
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dateKey = `${year}-${month}-${day}`;
+            const events = calendarEvents[dateKey] || [];
+            const hasEvent = events.length > 0;
+            const isToday = today.getFullYear() === year && today.getMonth() === month && today.getDate() === day;
+            html += `
+                <div class="calendar-day p-3 rounded-lg bg-black/40 border ${hasEvent ? 'border-purple-500 has-event' : 'border-gray-800'} ${isToday ? 'ring-2 ring-purple-400' : ''}"
+                     onclick="showDayEvents(${year}, ${month}, ${day}, this)">
+                    <span class="text-white font-bold text-sm ${isToday ? 'text-purple-300' : ''}">${day}</span>
+                    ${hasEvent ? `<div class="mt-1"><span class="text-xs bg-purple-500/30 text-purple-300 px-1 py-0.5 rounded">${events.length}</span></div>` : ''}
+                </div>
+            `;
+        }
+        const grid = document.getElementById('calendar-grid');
+        if (grid) grid.innerHTML = html;
+    }
+
+    function showDayEvents(year, month, day, el) {
+        document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+        if (el) el.classList.add('selected');
+
+        const dateKey = `${year}-${month}-${day}`;
+        const events = calendarEvents[dateKey] || [];
+        const popup = document.getElementById('event-popup');
+        const titleEl = document.getElementById('event-popup-title');
+        const dateEl = document.getElementById('event-popup-date');
+        const descEl = document.getElementById('event-popup-description');
+        const actionsEl = document.getElementById('event-popup-actions');
+
+        const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        const dateStr = `${monthNames[month]} ${day}, ${year}`;
+
+        if (events.length === 0) {
+            titleEl.textContent = 'No Events';
+            dateEl.textContent = dateStr;
+            descEl.textContent = 'No events scheduled for this day.';
+            actionsEl.innerHTML = '';
+        } else {
+            const ev = events[0];
+            titleEl.textContent = ev.title;
+            dateEl.textContent = `${dateStr}${ev.time ? ' at ' + ev.time : ''}`;
+            descEl.textContent = ev.description || '';
+            actionsEl.innerHTML = `<a href="https://discord.gg/arktes" target="_blank" class="px-4 py-2 bg-purple-600/20 border border-purple-500/50 text-purple-400 rounded-lg text-sm hover:bg-purple-600/40 transition-all"><i class="fab fa-discord mr-2"></i>Register on Discord</a>`;
+        }
+        popup.classList.remove('hidden');
+    }
+
+    function closeEventPopup() {
+        document.getElementById('event-popup').classList.add('hidden');
+        document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+    }
+
+    // ==================== ADD TOURNAMENT ====================
+    function openAddTournamentModal() {
+        document.getElementById('add-tournament-modal').classList.remove('hidden');
+    }
+
+    function closeAddTournamentModal() {
+        document.getElementById('add-tournament-modal').classList.add('hidden');
+    }
+
+    function addTournamentEvent(e) {
+        e.preventDefault();
+        const title = document.getElementById('event-title-input').value;
+        const dateVal = document.getElementById('event-date-input').value;
+        const time = document.getElementById('event-time-input').value;
+        const desc = document.getElementById('event-desc-input').value;
+
+        if (!dateVal) return;
+        const d = new Date(dateVal);
+        const dateKey = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+        if (!calendarEvents[dateKey]) calendarEvents[dateKey] = [];
+        calendarEvents[dateKey].push({ title, time, description: desc, type: 'tournament' });
+        saveCalendarEvents();
+        renderCalendar();
+        closeAddTournamentModal();
+        e.target.reset();
+        showNotification('Event Added', 'Tournament event added to calendar!', 'success');
+    }
+
+    // ==================== SCROLL REVEAL ====================
+    function revealOnScroll() {
+        document.querySelectorAll('.reveal').forEach(el => {
+            const top = el.getBoundingClientRect().top;
+            if (top < window.innerHeight - 150) el.classList.add('active');
+        });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+
+    // ==================== INIT ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        checkTOS();
+        checkGlobalAnnouncements();
+        loadCalendarEvents();
+        renderCalendar();
+        loadMatchesList();
+        revealOnScroll();
+        refreshDiscordStats();
+        startDiscordAutoRefresh();
+        setApplicationType('member');
+    });
+
+    // Close modals on Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeStaffLogin();
+            closeStatsSearch();
+            closeBanModal();
+            closeShadowBanModal();
+            closeBanAppeal();
+            closeGlobalAnnouncementModal();
+            closeEventPopup();
+            closeAddTournamentModal();
+            closeAddMatchModal();
+        }
+    });
+    </script>
+</body>
+</html>
